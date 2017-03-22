@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+    <classPathEntry location="E:\Untils\jdbc\mysql-connector-java-5.1.7-bin.jar"/>
+    <context id="context1" >
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://211.149.246.103:3306/firecontrol?useUnicode=true&amp;characterEncoding=UTF-8" userId="root" password="5y2pjmp4" />
+        <!-- 生成实体类 -->
+        <javaModelGenerator targetPackage="com.fire.po" targetProject="LuZhouFire" />
+        <!-- 生成mapxml文件 -->
+        <sqlMapGenerator targetPackage="com.fire.dao" targetProject="LuZhouFire" />
+        <!-- 生成dao -->
+        <javaClientGenerator targetPackage="com.fire.dao" targetProject="LuZhouFire" type="XMLMAPPER" />
+        <table schema="" tableName="" >
+
+        </table>
+    </context>
+</generatorConfiguration>

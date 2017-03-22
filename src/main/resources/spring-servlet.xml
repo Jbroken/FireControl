@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="gbk"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd  http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+    <!--启用springMVC注解-->
+    <context:annotation-config/>
+    <!--自动扫描-->
+    <context:component-scan base-package="com.fire"/>
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler />
+
+    <!-- 静态资源默认servlet配置
+        1、加入对静态资源的处理：js,gif,png
+        2、允许使用“/”做整体映射
+     -->
+    <mvc:default-servlet-handler/>
+    <mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
+    <mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
+    <mvc:resources location= "/images/" mapping="/images/**" />
+    <mvc:resources location="/manage/" mapping="/manage/**"/>
+    <mvc:resources location="/APPInterfaceJsp/" mapping="/APPInterfaceJsp/**"/>
+    <!-- 配置视图解析器 -->
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/" />
+        <property name="suffix" value=".jsp" />
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView" />
+    </bean>
+
+    <!--文件上传-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--默认编码-->
+        <property name="defaultEncoding" value="utf-8"></property>
+        <!--文件最大值10M-->
+        <property name="maxUploadSize" value="10485760000"></property>
+        <!--内存中的最大值-->
+        <property name="maxInMemorySize" value="40960"></property>
+    </bean>
+    <!--开启基于注解的AOP -->
+    <aop:aspectj-autoproxy/>
+</beans>
