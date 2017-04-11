@@ -39,12 +39,6 @@ public class UnitService {
 
 	}
 
-	public int updateCheckstate(Integer unitid, int checkstate, int checktype) {
-		// TODO Auto-generated method stub
-		return unitMapper.updateCheckstate(unitid, checkstate, checktype);
-
-	}
-
 	public int updateCheckstate(Firetable firetable) {
 		// TODO Auto-generated method stub
 		return unitMapper.updateCheckstate(firetable);

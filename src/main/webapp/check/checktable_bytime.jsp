@@ -19,14 +19,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript" src="js/checktable_bytime.js"></script>
 	<style type="text/css">
-		.query{
-			width: 600px;
-			margin-left: auto;
-			margin-right: auto;
-			font-size: 18px;
-			margin-top:100px;
-			text-align: center;
-		}
 		.header_policestation{
 			text-align: center;
 			font-weight:bold;
@@ -113,6 +105,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<tr>
 				<td>备注</td>
 				<td colspan="5" id="remarks"></td>
+			</tr>
+			<tr>
+				<td>身份信息</td>
+				<td>场所信息</td>
+				<td>签名</td>
+			</tr>
+			<tr>
+				<td><img id="CheckerPic" src="" alt="" width="195px" height="263px" style="vertical-align:middle;"></td>
+				<td><img id="UnitPic" src="" alt="" width="195px" height="263px" style="vertical-align:middle;"></td>
+				<td><img id="SignPic" src="" alt="" width="195px" height="263px" style="vertical-align:middle;"></td>
 			</tr>
 		</table>
 	</div>

@@ -154,4 +154,15 @@ public class Picture {
     public void setUploaddate(String uploaddate) {
         this.uploaddate = uploaddate;
     }
+
+    @Override
+    public String toString() {
+        return "Picture{" +
+                "pictureid=" + pictureid +
+                ", firetableid='" + firetableid + '\'' +
+                ", PicType='" + PicType + '\'' +
+                ", pictureurl='" + pictureurl + '\'' +
+                ", uploaddate='" + uploaddate + '\'' +
+                '}';
+    }
 }

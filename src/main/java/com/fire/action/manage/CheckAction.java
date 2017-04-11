@@ -135,7 +135,7 @@ public class CheckAction {
 	 * 时间：默认为当前时间，
 	 * 个数：默认为10个，
 	 * 时间单位：默认为天
-	 * @param PolicestationList 查看派出所检查记录的实体类
+	 * @param policestationList 查看派出所检查记录的实体类
 	 * @return 
 	 */
 	@SuppressWarnings("unchecked")

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class APPInterfaceAction {
@@ -47,15 +48,23 @@ public class APPInterfaceAction {
 		}
 	}
 
-	// 得到商铺具体信息
+	/**
+	 * 得到商铺具体信息
+	 * @param unitid
+	 * @return
+	 */
 	@RequestMapping(value = "getUnitById")
 	@ResponseBody
 	public List<UnitMasterImfor> getUnitInformationById(int unitid) {
 
 		return checkService.getUnitInformation(unitid);
 	}
-	
-	// 根据商铺id得到表册的检查日期
+
+	/**
+	 * 根据商铺id得到表册的检查日期
+	 * @param unitid
+	 * @return
+	 */
 	@RequestMapping(value = "getCheckdate")
 	@ResponseBody
 	public JSONObject getCheckdateById(Integer unitid) {
@@ -69,14 +78,24 @@ public class APPInterfaceAction {
 		return jsonObject;
 	}
 
-	// 根据检查日期得到具体表册
+	/**
+	 * 根据检查日期得到具体表册
+	 * @param model
+	 * @param checkdate
+	 * @param firetableid
+	 * @return
+	 */
 	@RequestMapping(value = "getTableInformation")
 	public String getTableInformation(Model model, String checkdate,String firetableid) {
 		model.addAttribute("table", checkService.findtableByDate(StringToDate.singleDate(checkdate), firetableid));
 		return "APPInterfaceJsp/check";
 	}
 
-	// 上传日常检查记录表册
+	/**
+	 *上传日常检查记录表册
+	 * @param firetable
+	 * @return
+	 */
 	@RequestMapping(value = "getCheckRecord")
 	@ResponseBody
 	public JSONObject uploadCheckRecord(Firetable firetable) {
@@ -121,7 +140,11 @@ public class APPInterfaceAction {
 
 	}
 
-	// 上传商铺营业前检查信息
+	/**
+	 *上传商铺营业前检查信息
+	 * @param checkrecord
+	 * @return
+	 */
 	@RequestMapping(value = "uploadBusinessInfor")
 	@ResponseBody
 	public int uploadBusinessInfor(Checkrecord checkrecord) {
@@ -129,7 +152,11 @@ public class APPInterfaceAction {
 		return checkService.uploadBusinessInfor(checkrecord);
 	}
 
-	// 上传举报投诉消防监督检查记录
+	/**
+	 * 上传举报投诉消防监督检查记录
+	 * @param reporttable
+	 * @return
+	 */
 	@RequestMapping(value = "uploadReportInfo")
 	@ResponseBody
 	public int uploadReportInfo(Reporttable reporttable) {
@@ -137,7 +164,11 @@ public class APPInterfaceAction {
 		return tableService.uploadReportInfo(reporttable);
 	}
 
-	// 上传隐患报告书
+	/**
+	 * 上传隐患报告书
+	 * @param troubletable
+	 * @return
+	 */
 	@RequestMapping(value = "uploadTroubleInfo")
 	@ResponseBody
 	public int uploadTroubleReport(Troubletable troubletable) {
@@ -145,39 +176,26 @@ public class APPInterfaceAction {
 		return tableService.uploadTroubleInfo(troubletable);
 	}
 
-	// 上传移交书
+	/**
+	 * 上传移交书
+	 * @param transfertable
+	 * @return
+	 */
 	@RequestMapping(value = "uploadTransferInfo")
 	@ResponseBody
 	public int uploadTransfer(Transfertable transfertable) {
 		return tableService.uploadTransferInfo(transfertable);
 	}
 
-	//上传表册缓存数据
+	/**
+	 * 上传表册缓存数据
+	 * @param infoList
+	 */
 	@RequestMapping(value = "uploadAllData")
 	@ResponseBody
 	public void uploadCacheData(CacheData infoList){
-		for(TableData tableData : infoList.getTableData()){
-			System.out.print(infoList);
-			//上传常规检查
-			if(tableData.getTableType().equals("日常检查表")){
-				uploadCheckRecord(tableData.getFiretable());
-			}
-			//上传营业前表册的数据
-			if(tableData.getTableType().equals("营业前检查表")){
-				uploadBusinessInfor(tableData.getCheckrecord());
-			}
-			//上传举报表表册的数据
-			if(tableData.getTableType().equals("举报表")){
-				uploadReportInfo(tableData.getReporttable());
-			}
-			//上传报告书表册的数据
-			if(tableData.getTableType().equals("报告书")){
-				uploadTroubleReport(tableData.getTroubletable());
-			}
-			//上传移交书表册的数据
-			if(tableData.getTableType().equals("移交书")){
-				uploadTransfer(tableData.getTransfertable());
-			}
+		for (TableData tableData : infoList.getTableData()) {
+			tableData.getTableType();
 		}
 	}
 

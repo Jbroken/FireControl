@@ -1,8 +1,6 @@
 package com.fire.po;
 
 
-import java.util.List;
-
 public class  TableData {
 	
 	private Firetable firetable;	//日常表

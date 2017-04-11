@@ -17,7 +17,6 @@
 	<link rel="stylesheet" type="text/css" href="css/demo.css">
 	<link rel="stylesheet" type="text/css" href="css/tablehead.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
@@ -26,8 +25,8 @@
 
 <body>
 <div class="query">
-	<label for="unitname">场所名称：</label>
-	<input id="unitname" class="easyui-combobox" style="height: 35px;width:300px;"
+	<label for="unit_name">场所名称：</label>
+	<input id="unit_name" class="easyui-combobox" style="height: 35px;width:300px;"
 		   data-options="valueField:'unitname' , textField:'unitname', loader : myloader, mode : 'remote'">
 	<input id="subm" type="submit" class="btn btn-primary" value="查询"
 		   onclick="getTableByUnit()">
@@ -43,7 +42,7 @@
 		<div class="header_policestation"></div>
 		<div class="header_title">公安派出所日常消防监督检查记录</div>
 		<div class="header_number">
-			编号：<span id="unitid">[]</span>第 <span id="firetableid">号</span>
+			编号：<span id="unitid">[]</span>第<span id="firetableid">号</span>
 		</div>
 	</div>
 	<div class="check table">
@@ -90,9 +89,9 @@
 				<td>签名</td>
 			</tr>
 			<tr>
-				<td id="CheckerPic"><img src="" alt=""></td>
-				<td id="UnitPic"><img src="" alt=""></td>
-				<td id="SignPic"><img src="" alt=""></td>
+				<td><img id="CheckerPic" src="" alt="" width="195px" height="263px" style="vertical-align:middle;"></td>
+				<td><img id="UnitPic" src="" alt="" width="195px" height="263px" style="vertical-align:middle;"></td>
+				<td><img id="SignPic" src="" alt="" width="195px" height="263px" style="vertical-align:middle;"></td>
 			</tr>
 
 		</table>

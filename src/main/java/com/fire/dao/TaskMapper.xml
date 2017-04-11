@@ -268,4 +268,18 @@
       SetTime = #{settime,jdbcType=VARCHAR}
     where taskid = #{taskid,jdbcType=INTEGER}
   </update>
+
+  <!-- 用户自己创建sql-->
+  <insert id="insertTask" parameterType="java.util.List">
+      <selectKey resultType="int" order="AFTER">
+        SELECT LAST_INSERT_ID()
+      </selectKey>
+      INSERT into task (taskid, unitid, Tasktime, SetTime)
+      VALUES
+      <foreach collection="list" item="task" index="index" separator=",">
+        (
+          #{task.taskid}, #{task.unitid}, #{task.Tasktime}, #{task.SetTime}
+        )
+      </foreach>
+  </insert>
 </mapper>

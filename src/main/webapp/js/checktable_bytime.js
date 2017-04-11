@@ -1,6 +1,7 @@
 /**
  * Created by Broken on 2016/10/20.
  */
+var PicList = ["CheckerPic","UnitPic","SignPic"];
 function getfiretable(){
     //获取日期
     var startdate= $("#startdate").datebox("getValue");
@@ -83,13 +84,23 @@ function getfiretable(){
                             type: "get",
                             success:function(data){
                             	var tabInfo = data[0];
-                                console.info(tabInfo);
+                                //清除图片缓存
+                                for (var pic in PicList){
+                                    $("#"+PicList[pic]).attr("src","");
+                                    $("#"+PicList[pic]).attr("alt","无图片信息！");
+                                }
                             	for(var key in tabInfo){
                             		if(tabInfo.hasOwnProperty(key)){
                             			if(tabInfo[key] != null && key != "picture" && document.getElementById(key) != null){
                             				document.getElementById(key).innerHTML = (tabInfo[key]);
                             			}
                             		}
+                                    if(key == "picture"){
+                                        for (var index = 0; index < tabInfo.picture.length;index++ ){
+                                            $("#"+tabInfo.picture[index].picType).attr("src",tabInfo.picture[index].pictureurl);
+                                            $("#"+tabInfo.picture[index].picType).attr("alt",tabInfo.picture[index].picType);
+                                        }
+                                    }
                             	}
                                 var top = $("#return_jsp").offset().top;
                                 var left = $("#return_jsp").offset().center;

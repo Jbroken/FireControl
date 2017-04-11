@@ -175,4 +175,28 @@ public class FiretableInformation {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
+
+
+	@Override
+	public String toString() {
+		return "FiretableInformation{" +
+				"policestation='" + policestation + '\'' +
+				", unitid=" + unitid +
+				", policeid=" + policeid +
+				", unitname='" + unitname + '\'' +
+				", master='" + master + '\'' +
+				", address='" + address + '\'' +
+				", unitproperty='" + unitproperty + '\'' +
+				", area='" + area + '\'' +
+				", floors=" + floors +
+				", height=" + height +
+				", firetableid='" + firetableid + '\'' +
+				", checker='" + checker + '\'' +
+				", otherchecker='" + otherchecker + '\'' +
+				", checkdate='" + checkdate + '\'' +
+				", problem='" + problem + '\'' +
+				", remarks='" + remarks + '\'' +
+				", picture=" + picture +
+				'}';
+	}
 }

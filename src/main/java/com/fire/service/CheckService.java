@@ -59,12 +59,9 @@ public class CheckService {
 	}
 
 	/**
-	 * @param 得到分局信息
-	 *            ；
-	 * @param 通过循环
-	 *            ，将每组数据的状态设置为closed；
-	 * @param 为分局信息添加一个附属属性
-	 *            ，便于前台通过判断得到派出所信息；
+	 * 得到分局信息,通过循环将每组数据的状态设置为closed；
+	 * 为分局信息添加一个附属属性,便于前台通过判断得到派出所信息；
+	 * @param
 	 * 
 	 */
 	public List<TreeModel> getTree() {
@@ -78,11 +75,10 @@ public class CheckService {
 	}
 
 	/**
-	 * @param 根据分局id得到派出所信息
-	 * @param 通过循环
-	 *            ，将每组数据的状态设置为closed
-	 * @param 为派出所信息添加一个附属属性
-	 *            ，便于前台通过判断得到派商铺信息；
+	 * 根据分局id得到派出所信息,通过循环 ，将每组数据的状态设置为closed
+	 * 为派出所信息添加一个附属属性 ，便于前台通过判断得到派商铺信息；
+	 * @param branchid
+	 *
 	 * 
 	 */
 	public List<TreeModel> getpolicename(Integer branchid) {
@@ -95,12 +91,10 @@ public class CheckService {
 	}
 
 	/**
-	 * @param 根据派出所id得到商铺信息
-	 * @param 通过循环
-	 *            ，将每组数据的状态设为open
-	 * @param 为商铺信息添加一个附属属性
-	 *            ，便于前台通过判断得到被选中的商铺信息
-	 * 
+	 * 根据派出所id得到商铺信息,通过循环将每组数据的状态设为open
+	 * 为商铺信息添加一个附属属性，便于前台通过判断得到被选中的商铺信息
+	 * @param  policeid
+	 *
 	 */
 	public List<TreeModel> getunit(Integer policeid) {
 		// TODO Auto-generated method stub
@@ -111,8 +105,6 @@ public class CheckService {
 		}
 		return tree;
 	}
-
-	// 根据类别和警员所属摆出所查询场所
 
 	/**
 	 * 常规检查
@@ -158,26 +150,11 @@ public class CheckService {
 		return jObject;
 	}
 
-	public List<UnitType> findUnitByType(String type) {
-		// TODO Auto-generated method stub
-		return unitMapper.getUnitByType(type);
-	}
-
 	public List<UnitMasterImfor> getUnitInformation(int unitid) {
 		// TODO Auto-generated method stub
 		return unitMapper.getUnitInformation(unitid);
 	}
 
-//	public List<UnitType> findUnitByPolicestation(String policestation,
-//			String type) {
-//		// TODO Auto-generated method stub
-//		return unitMapper.getUnit(policestation, type);
-//	}
-
-	public List<UnitChildren> findChildrenById(int id) {
-		// TODO Auto-generated method stub
-		return unitMapper.getChildrenById(id);
-	}
 
 	public List<CheckData> getCheckdateById(Integer unitid) {
 		// TODO Auto-generated method stub

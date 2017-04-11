@@ -20,8 +20,9 @@ public class TaskAction {
 	TaskService taskService;
 
 	/**
-	 * 
-	 * @param 对树形中选中的商铺进行检查周期发布
+	 * 对树形中选中的商铺进行检查周期发布
+	 * @param unitidform
+	 * @return
 	 */
 	@RequestMapping("addTime")
 	@ResponseBody

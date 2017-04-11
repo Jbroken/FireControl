@@ -480,4 +480,25 @@ public class Transfertable {
     public void setPolicestation(String policestation) {
         this.policestation = policestation;
     }
+
+    @Override
+    public String toString() {
+        return "Transfertable{" +
+                "transfertableid='" + transfertableid + '\'' +
+                ", userid=" + userid +
+                ", unitid=" + unitid +
+                ", unitname='" + unitname + '\'' +
+                ", address='" + address + '\'' +
+                ", area='" + area + '\'' +
+                ", floors='" + floors + '\'' +
+                ", height=" + height +
+                ", islevel='" + islevel + '\'' +
+                ", risk='" + risk + '\'' +
+                ", firedapartment='" + firedapartment + '\'' +
+                ", masterials='" + masterials + '\'' +
+                ", transferdate='" + transferdate + '\'' +
+                ", branch='" + branch + '\'' +
+                ", policestation='" + policestation + '\'' +
+                '}';
+    }
 }

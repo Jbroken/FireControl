@@ -145,8 +145,8 @@ public class CountService {
 
 	/***
 	 * 问题统计
-	 * 
-	 * @param 分项统计各类
+	 * 分项统计各类
+	 * @param
 	 * @return
 	 */
 
@@ -192,19 +192,9 @@ public class CountService {
 		return firetableMapper.countchange();
 	}
 
-	public List<UnitChange> countUnitUnqualified() {
-
-		return firetableMapper.UnitUnqualified();
-	}
-
 	public List<PersonalCondition> CheckPersonalCondition(String checker) {
 		// TODO Auto-generated method stub
 		return firetableMapper.CountPersonalCondition(checker);
-	}
-
-	public List<CheckCondition> CheckRegionCondition(String name) {
-
-		return firetableMapper.CountRegionCondition(name);
 	}
 
 	public List<UnitInformation> checkFiretableByTime(Date date1, Date date2) {
@@ -228,7 +218,7 @@ public class CountService {
 	/**
 	 * Datetype 1、2、3 分别表示时间类型为 天、周、月
 	 * @param policestationList
-	 * @param policestationid
+	 * @param policeid
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")

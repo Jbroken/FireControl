@@ -1,3 +1,4 @@
+var PicList = ["CheckerPic","UnitPic","SignPic"];
 var myloader = function(param,success,error){
         var q = param.q || '';          
         if (q.length <=0) {
@@ -19,11 +20,11 @@ var myloader = function(param,success,error){
         }
     };
 	function getTableByUnit(){
-	var unitname = $("#unitname").combobox('getValue');
+	var unit_name = $("#unit_name").combobox('getValue');
 	$.ajax({
 		url:"getTableByUnitname",
 		type:"POST", 
-	 	data:{"unitname":unitname},
+	 	data:{"unitname":unit_name},
 	 	error:function(errorMeg){
 	 		alert("数据加载异常，请重试！");
 	 		},
@@ -90,13 +91,19 @@ var myloader = function(param,success,error){
 									var firetableid = nodes.firetableid;
 										$.ajax({
 											url:'getTableInfo',
-											data:{"checkdate":checkdate,"firetableid":firetableid},
+											data:{"checkdate":checkdate,
+												"firetableid":firetableid
+											},
 											dataType:'json',
 											cache:false,
 											type: "get",
 											success:function(data){
 												var tabInfo = data[0];
-												console.log(tabInfo)
+												//清除图片缓存
+												for (var pic in PicList){
+													$("#"+PicList[pic]).attr("src","");
+                                                    $("#"+PicList[pic]).attr("alt","无图片信息！");
+												}
 												for(var key in tabInfo){
 				                            		if(tabInfo.hasOwnProperty(key)){
 				                            			if(tabInfo[key] != null && key != "picture"){
@@ -104,8 +111,9 @@ var myloader = function(param,success,error){
 				                            			}
 				                            		}
 				                            		if(key == "picture"){
-														for (var index = 0; index++; index < tabInfo.picture){
-															document.getElementById(tabInfo.picture[index].picType).src = tabInfo.picture[index].picyureurl
+														for (var index = 0; index < tabInfo.picture.length; index++ ){
+															$("#"+tabInfo.picture[index].picType).attr("src",tabInfo.picture[index].pictureurl);
+                                                            $("#"+tabInfo.picture[index].picType).attr("alt",tabInfo.picture[index].picType);
 														}
 													}
 				                            	}
@@ -113,7 +121,7 @@ var myloader = function(param,success,error){
 												var left = $("#return_jsp").offset().center;
 												$('#return_jsp').window('open').window('resize',{top: top,left:left});	
 											},
-											error:function(data){
+											error:function(){
 												$.message.alert('错误提示！','请求失败，稍后再试！','error');
 											}
 										});	

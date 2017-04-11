@@ -20,16 +20,6 @@ public class PoliceManageService {
 	@Autowired
 	FiretableMapper firetableMapper;
 
-	public int AddPolice(Police police) {
-
-		return policeMapper.insertSelective(police);
-
-	}
-
-	public Police selectPolice(Police police) {
-
-		return policeMapper.selectPolice(police);
-	}
 
 	public PoliceInfo findPoliceByName(String tel) {
 
