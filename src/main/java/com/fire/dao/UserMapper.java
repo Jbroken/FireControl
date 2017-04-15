@@ -100,13 +100,17 @@ public interface UserMapper {
     //以下代码由用户自己添加
    	@Select("select * from user u where u.userid = #{userid}")
    	User getUserById(int userid);
+
    	@Select("select user.userid,user.username,user.password,user.relname,user.lastlogin,role.roleid,role.usertype from user left join role on user.roleid = role.roleid where role.roleid is not NULL")
    	List<User> listPageUser(User user);
+
    	@Select("select count(userid) from user where username = #{username}")
    	int getCountByName(String username);
+
    	//根据用户id得到用户权限
    	@Select("select u.userid,u.username,u.userlimit,u.relname,u.password,r.roleid,r.usertype,r.userlimit from user u left join role r on u.roleid=r.userlimit where u.userid = #{userid}")
    	User getUserAndRoleById(Integer userid);
+
    	@Select("select * from user where username = #{username} or tel = #{username} and password = #{password}")
    	User getUserInfo(@Param("username")String username, @Param("password")String password);
 }

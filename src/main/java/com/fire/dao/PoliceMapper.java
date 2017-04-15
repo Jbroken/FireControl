@@ -33,8 +33,6 @@ public interface PoliceMapper {
 
     int updateByPrimaryKey(Police record);
 
-	Police selectPolice(Police police);
-	//
 	@Select("select user.userid,user.tel,user.password,user.idcard,policestation.policeStation,count(*) as unitCount,sum(unit.checkstate=1) as noCheckCount from user,policestation,unit where tel = #{value} and user.policeid = unit.policeid and user.policeid = policestation.policeid")
     PoliceInfo selectPoliceByName(String tel);
 }

@@ -18,7 +18,6 @@ import com.fire.service.UnitService;
 import com.fire.utils.ExcelImportUtil;
 
 @Controller
-// @RequestMapping("manage")
 public class ExcelAction {
 	@Autowired
 	TableService fireTableService;

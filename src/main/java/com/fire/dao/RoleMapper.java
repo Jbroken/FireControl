@@ -34,11 +34,13 @@ public interface RoleMapper {
 
 	int getCountByName(Role role);
     
-  //以下代码由用户自己添加
+    //以下代码由用户自己添加
   	@Select("select * from role")
   	List<Role> listAllroles();
+
   	@Select("select * from role where roleid=#{roleid}")
 	Role getRoleById(int roleid);
+
   	@Select("update role set userlimit=#{userlimit} where roleid=#{roleid}")
 	void updateRoleUserlimit(Role role);
 }

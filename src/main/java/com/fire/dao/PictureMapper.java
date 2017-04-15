@@ -96,6 +96,7 @@ public interface PictureMapper {
      * @mbggenerated Thu Nov 24 21:35:51 CST 2016
      */
     int updateByPrimaryKey(Picture record);
+
     @Select("select * from picture where firetableid = #{firetableid}")
 	List<Picture> findPictureById(String firetableid);
 }

@@ -31,6 +31,7 @@ public interface MenuMapper {
     int updateByPrimaryKeySelective(Menu record);
     
     int updateByPrimaryKey(Menu record);
+
     /**
      * 以下代码由用户自己添加
      * @return
@@ -38,13 +39,11 @@ public interface MenuMapper {
     //查询主菜单
     @Select("select * from menu where modelid is null")
 	List<Menu> listallSubMenu();
+
     //通过ID查找菜单
     @Select("select * from menu where menuid = #{menuid}")
 	Menu getMenuById(Integer menuid);
 
-	void insertMenu(Menu menu);
-	@Select("select * from menu where modelid = #{modelid}")
-	List<Menu> listallSubMenuByParentId(Integer menuid);
 	//删除
 	@Select("delete from menu where menuid = #{menuid} or modelid = #{menuid}")
 	void deleteMenuById(Integer menuid);

@@ -36,11 +36,14 @@ public interface TaskMapper {
   
     //得到场所的周期信息
     @Select("select unit.unitname,task.unitid,task.taskid,task.tasktime,task.settime from unit join task where unit.unitid = task.unitid ")
-	List<Task> getTaskInfo();
+    List<Task> getTaskInfo();
+
     @Select("select tasktime,settime from task where unitid = #{unitid}")
-	List<Task> selectTaskTime(Integer unitid);
+    List<Task> selectTaskTime(Integer unitid);
+
     @Update("update task set settime = #{nowDate} where unitid = #{unitid}")
 	int updateSetTime(@Param(value="nowDate")String nowDate,@Param(value="unitid")Integer unitid);
+
     //更新周期
     @Update("update task set settime = #{settime},tasktime = #{tasktime} where taskid=#{taskid}")
 	int updateTaskInfo(@Param(value="settime")String settime, @Param(value="tasktime")int tasktime, @Param(value="taskid")int taskid);

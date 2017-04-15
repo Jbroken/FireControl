@@ -19,10 +19,11 @@ import com.fire.service.MenuService;
 @Controller
 @RequestMapping("/menu")
 public class MenuAction {
+
 	@Autowired
 	MenuService menuService;
 
-	/*
+	/**
 	 * 
 	 * 显示菜单列表
 	 */
@@ -33,7 +34,7 @@ public class MenuAction {
 		return "manage/menus";
 	}
 
-	/*
+	/**
 	 * 
 	 * 请求新增菜单页面
 	 */
@@ -44,7 +45,7 @@ public class MenuAction {
 		return "manage/menus_info";
 	}
 
-	/*
+	/**
 	 * 
 	 * 请求编辑菜单页面
 	 */
@@ -59,7 +60,7 @@ public class MenuAction {
 		return "manage/menus_info";
 	}
 
-	/*
+	/**
 	 * 
 	 * 保存菜单信息
 	 */
@@ -70,7 +71,7 @@ public class MenuAction {
 		return "manage/save_result";
 	}
 
-	/*
+	/**
 	 * 
 	 * 获取当前菜单的所有子菜单
 	 */

@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
+import com.fire.utils.RoleUtil;
 import net.sf.json.JSONArray;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,20 +73,7 @@ public class RoleAction {
 		List<Menu> menuList = menuService.listAllMenu();
 		Role role = roleService.getRoleById(roleid);
 		String userlimit = role.getUserlimit();
-		if (Tools.notEmpty(userlimit)) {
-			for (Menu menu : menuList) {
-				menu.setHasMenu(RightsHelper.testRights(userlimit,
-						menu.getMenuid()));
-				if (menu.isHasMenu()) {
-					List<Menu> subMenuList = menu.getSubMenu();
-					for (Menu sub : subMenuList) {
-						sub.setHasMenu(RightsHelper.testRights(userlimit,
-								sub.getMenuid()));
-					}
-				}
-
-			}
-		}
+		RoleUtil.userAuth(userlimit,menuList);
 		JSONArray arr = JSONArray.fromObject(menuList);
 		String json = arr.toString();
 		json = json.replaceAll("menuid", "id").replaceAll("menuname", "name")
