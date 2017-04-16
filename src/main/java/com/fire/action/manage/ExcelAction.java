@@ -19,17 +19,20 @@ import com.fire.utils.ExcelImportUtil;
 
 @Controller
 public class ExcelAction {
-	@Autowired
-	TableService fireTableService;
+
 	@Autowired
 	UnitService unitService;
-	@Autowired
-	CountService countService;
 
-	// 商铺信息上传
+	/**
+	 * 上传场所信息
+	 * @param file
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping("/ExcelUpload")
 	@ResponseBody
-	public String UploadExcel(MultipartFile file, Model model)
+	public void UploadExcel(MultipartFile file, Model model)
 			throws IOException {
 		InputStream fis = file.getInputStream();
 
@@ -42,7 +45,5 @@ public class ExcelAction {
 			// 上传至数据库
 			unitService.insertExcel(map);
 		}
-		// 上传成功后跳转到成功页面
-		return "index";
 	}
 }

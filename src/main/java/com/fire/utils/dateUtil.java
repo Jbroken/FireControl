@@ -14,13 +14,13 @@ import java.util.GregorianCalendar;
  */
 public class dateUtil {
 	/**
-	 * @param Java Calender类获得指定日期加几天 
-	 * @param specifiedDay 为之前的日期
+	 * Calender类获得指定日期加几天
+	 * @param specified 为之前的日期
 	 * @param d  day 
 	 * @author Broken
 	 * @return 返回加上周期的日期
 	 */	 
-	public static String getSpecifiedDayAfter(String specified,int d) {  
+	public static String getSpecifiedDayAfter(String specified, int d) {
         Calendar c = Calendar.getInstance();  
         Date date = null;  
         try {  
@@ -41,7 +41,7 @@ public class dateUtil {
 	 * @param b number
 	 * @return 另外一个时间
 	 */
-	public static String  date(String a,int b) {
+	public static String  date(String a, int b) {
 		 Calendar c = Calendar.getInstance();  
 	     Date date = null;  
 	        try {  
@@ -56,7 +56,7 @@ public class dateUtil {
 	        return dayAfter; 
 	}
 	/**
-	 * @param 通过SimpleDateFormat获取当前时间
+	 * 通过SimpleDateFormat获取当前时间
 	 * @author Broken
 	 * @return 返回当前日期，格式为（"YYYY-mm-dd"）
 	 *
@@ -75,7 +75,7 @@ public class dateUtil {
 	 * @param b
 	 * @return 返回天数 day=a-b
 	 */
-	public static long minusDate(String a,String b){
+	public static long minusDate(String a, String b){
 		
 		long day = (StringToDate.singleDate(a).getTime()-StringToDate.singleDate(b).getTime())/(24*60*60*1000);
 		
@@ -89,7 +89,7 @@ public class dateUtil {
 	public static int getWeekOfYear(String dateTime){
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = Calendar.getInstance();
-		Date date =null;
+		Date date = null;
 		try {
 			date = format.parse(dateTime);
 		} catch (ParseException e) {

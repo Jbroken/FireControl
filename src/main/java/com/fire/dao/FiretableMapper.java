@@ -120,12 +120,12 @@ public interface FiretableMapper {
 	List<PoliceStInfo> getPoliceStInfoByDay(@Param(value="date")Date date,@Param(value="policeid")Policestationid policeid);
 
 	//按周查询选中派出所的检查信息
-	@Select("select policestation.policeStation,count(*) as tablesum,DATE_FORMAT(firetable.checkdate,'%v') as time from policestation,unit,firetable where policestation.policeid = unit.policeid = #{policeid.policeid} and unit.unitid = firetable.unitid and firetable.checkdate between DATE_SUB(#{enddate},INTERVAL ${number} week) and #{enddate} group by DATE_FORMAT(firetable.checkdate,'%v')")
+	@Select("select policestation.policeStation,count(*) as tablesum,DATE_FORMAT(firetable.checkdate,'%v') as time from policestation,unit,firetable where policestation.policeid = #{policeid.policeid}  and firetable.checkdate between DATE_SUB(#{enddate},INTERVAL ${number} week) and #{enddate} and unit.unitid = firetable.unitid group by DATE_FORMAT(firetable.checkdate,'%v')")
 	List<PoliceStInfo> getPoliceStInfoByWeek(@Param(value="enddate")Date enddate,@Param(value="number")String number,
 			@Param(value="policeid")Policestationid policeid);
 
 	//按月查询选中派出所的检查信息
-	@Select("select policestation.policestation,count(*) as tablesum,DATE_FORMAT(firetable.checkdate,'%Y-%m') as time from policestation,unit,firetable where policestation.policeid = unit.policeid = #{policeid.policeid} and unit.unitid = firetable.unitid and firetable.checkdate between DATE_SUB(#{enddate},INTERVAL ${number} month) and #{enddate} group by DATE_FORMAT(firetable.checkdate,'%Y%m')")
+	@Select("select policestation.policestation,count(*) as tablesum,DATE_FORMAT(firetable.checkdate,'%Y-%m') as time from policestation,unit,firetable where policestation.policeid = #{policeid.policeid} and firetable.checkdate between DATE_SUB(#{enddate},INTERVAL ${number} month) and #{enddate} and unit.unitid = firetable.unitid group by DATE_FORMAT(firetable.checkdate,'%Y%m')")
 	List<PoliceStInfo> getPoliceStInfoByMouth(@Param(value="enddate")Date enddate,@Param(value="number")String number,
 			@Param(value="policeid")Policestationid policeid);
     

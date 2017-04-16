@@ -12,13 +12,4 @@ public class UnitListForm {
 	public void setUnitid(List<Unitid> unitid) {
 		this.unitid = unitid;
 	}
-
-	
-
-
-
-	
-	
-
-	
 }

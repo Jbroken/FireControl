@@ -44,6 +44,8 @@ public interface MenuMapper {
     @Select("select * from menu where menuid = #{menuid}")
 	Menu getMenuById(Integer menuid);
 
+    @Select("select * from menu where modelid = #{modelid}")
+    List<Menu> listallSubMenuByParentId(Integer menuid);
 	//删除
 	@Select("delete from menu where menuid = #{menuid} or modelid = #{menuid}")
 	void deleteMenuById(Integer menuid);

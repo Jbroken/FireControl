@@ -108,7 +108,7 @@
 					var end = start + pageSize;
 					$('#dg').datagrid("loadData", data.slice(start, end));
 					pager.pagination('refresh', {
-						total : aa.length,
+						total : data.length,
 						pageNumber : pageNo
 					});
 				}

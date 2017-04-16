@@ -73,7 +73,12 @@ public class CheckAction {
 		return checkService.queryInformation(policeid);
 	}
 
-	// 异步加载数据，得到树形
+	/**
+	 * 异步加载数据，得到树形
+	 * @param branchid
+	 * @param policeid
+	 * @return
+	 */
 	@RequestMapping(value = "getTree")
 	@ResponseBody
 	public List<TreeModel> getTree(Integer branchid, Integer policeid) {
@@ -92,7 +97,12 @@ public class CheckAction {
 			return unitList;
 	}
 
-	// 按时间查询消防表册
+	/**
+	 * 按时间查询消防表册
+	 * @param startdate
+	 * @param enddate
+	 * @return
+	 */
 	@RequestMapping(value = "getFiretable")
 	@ResponseBody
 	public List<UnitInformation> checkFiretable(String startdate, String enddate) {
@@ -131,10 +141,10 @@ public class CheckAction {
 				firetableid);
 	}
 	/**
-	 * 数据类型：默认为覆盖率，
-	 * 时间：默认为当前时间，
-	 * 个数：默认为10个，
-	 * 时间单位：默认为天
+	 * 数据类型data_type：默认为覆盖率，
+	 * 时间end_time：默认为当前时间，
+	 * 个数number：默认为10个，
+	 * 时间单位date_type：默认为天
 	 * @param policestationList 查看派出所检查记录的实体类
 	 * @return 
 	 */

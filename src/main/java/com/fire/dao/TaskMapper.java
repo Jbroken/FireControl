@@ -47,4 +47,5 @@ public interface TaskMapper {
     //更新周期
     @Update("update task set settime = #{settime},tasktime = #{tasktime} where taskid=#{taskid}")
 	int updateTaskInfo(@Param(value="settime")String settime, @Param(value="tasktime")int tasktime, @Param(value="taskid")int taskid);
+
 }

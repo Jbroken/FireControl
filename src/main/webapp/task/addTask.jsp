@@ -68,7 +68,7 @@
 			}
 		}
 		$('#dg').datagrid({
-			title : "选中商铺列表",
+			title : "选中场所列表",
 			width : '100%',
 			height : 'auto',
 			fitColumns : true, // 数据网格（datagrid）底部显示分页工具栏。
@@ -143,6 +143,7 @@
 				icon:'info',
 				style:{
 					right:'',
+                    top:document.body.scrollTop+document.documentElement.scrollTop,
 					bottom:'',
 				}
 			});
@@ -154,6 +155,7 @@
 				icon:'info',
 				style:{
 					right:'',
+                    top:document.body.scrollTop+document.documentElement.scrollTop,
 					bottom:'',
 				}
 			});
@@ -165,13 +167,14 @@
 				type : "POST",
 				traditional : true,
 				success : function(data) {
-					$.messager.show({
+					$.messager.alert({
 						title:'提示！',
 						msg:'恭喜你成功设置' + row.length + '条数据！',
 						timeout:3000,
 						icon:'info',
 						style:{
 							right:'',
+                            top:document.body.scrollTop+document.documentElement.scrollTop,
 							bottom:'',
 						}
 					});
@@ -186,6 +189,7 @@
 						icon:'error',
 						style: {
 							right: '',
+                            top:document.body.scrollTop+document.documentElement.scrollTop,
 							bottom: '',
 						}
 					});
@@ -201,7 +205,7 @@
 	 data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true">
 	<br />
 	起始日期：<input id="SetTime" type="text" class="easyui-datebox" required="required"><br />
-	商铺周期：<input type="text" id="tasktime" /><br /> <br />
+	场所周期(天)：<input type="text" id="tasktime" /><br /> <br />
 	<input type="button" value=" 添 加 " onclick="addTimeInfo()" />
 </div>
 </body>

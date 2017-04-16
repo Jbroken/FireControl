@@ -2,19 +2,16 @@ package com.fire.action.manage;
 
 import java.util.List;
 
-import net.sf.json.JSONObject;
-
+import com.fire.po.Unitid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fire.po.Task;
 import com.fire.po.UnitListForm;
-import com.fire.po.Unitid;
 import com.fire.service.TaskService;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class TaskAction {
 	@Autowired
 	TaskService taskService;
@@ -25,34 +22,39 @@ public class TaskAction {
 	 * @return
 	 */
 	@RequestMapping("addTime")
-	@ResponseBody
-	public JSONObject ReleaseTask(UnitListForm unitidform) {
-		JSONObject jsonObject = new JSONObject();
+	public void ReleaseTask(UnitListForm unitidform) {
 		for (Unitid unitid : unitidform.getUnitid()) {
 			taskService.addTasktime(unitid);
 		}
-		jsonObject.put("result", "success");
-		return jsonObject;
 	}
 
-	// 得到周期具体信息
+	/**
+	 * 得到周期具体信息
+	 * @return
+	 */
 	@RequestMapping("getTaskInfo")
-	@ResponseBody
 	public List<Task> getTaskInfo() {
-		List<Task> task = taskService.getTaskInfo();
-		return task;
+		return taskService.getTaskInfo();
 	}
 
-	// 修改周期
+	/**
+	 * 修改周期
+	 * @param settime
+	 * @param tasktime
+	 * @param taskid
+	 * @return
+	 */
 	@RequestMapping(value = "updateTaskInfo")
-	@ResponseBody
 	public Object updateTaskInfo(String settime, int tasktime, int taskid) {
 		return taskService.updateTaskInfo(settime, tasktime, taskid);
 	}
 
-	// 删除周期
+	/**
+	 * 删除周期
+	 * @param taskid
+	 * @return
+	 */
 	@RequestMapping("delTaskInfo")
-	@ResponseBody
 	public int delTaskInfo(int taskid) {
 		return taskService.delTaskInfo(taskid);
 	}

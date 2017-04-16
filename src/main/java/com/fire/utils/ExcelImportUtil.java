@@ -53,22 +53,17 @@ public class ExcelImportUtil {
                         cell.setCellType(XSSFCell.CELL_TYPE_STRING);  
                     }
               //将数据添加到Val中
-                    String val = cell.getStringCellValue();  
-                    
+                    String val = cell.getStringCellValue();
                  //判断是否只有一行ֵ
                     if(i == firstRow) {  
                         	break;  
-                    }else{  
-                       
-                    	map.put(key, val);  
-                          
+                    }else{
+                    	map.put(key, val);
                     }  
                 }  
                 //将数据以键值对的形式添加到List中
-                if(i != firstRow) {  
-                	
-                    data.add(map);  
-                    
+                if(i != firstRow) {
+                    data.add(map);
                 }  
             }  
             

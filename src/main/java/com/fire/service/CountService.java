@@ -187,10 +187,6 @@ public class CountService {
 		return firetableAllColumn;
 	}
 
-	public List<UnitChange> countunitchange() {
-
-		return firetableMapper.countchange();
-	}
 
 	public List<PersonalCondition> CheckPersonalCondition(String checker) {
 		// TODO Auto-generated method stub
@@ -221,7 +217,6 @@ public class CountService {
 	 * @param policeid
 	 * @return
 	 */
-	@SuppressWarnings("rawtypes")
 	public List getPoliceStInfo(PolicestationList policestationList, Policestationid policeid) {
 		// TODO Auto-generated method stub		
 		List<PoliceCheckInfo> unitsum= firetableMapper.getUnitSum(policeid);
@@ -234,19 +229,17 @@ public class CountService {
 					dateList.add(date);
 				}
 				dateList.add(policestationList.getEnddate());
-				List<Object> Info = new ArrayList<Object>();
-				
-				for (String date : dateList) {	
+				List<PoliceStInfo> Info = new ArrayList<PoliceStInfo>();
+				for (String day : dateList) {
 					PoliceStInfo dataInfo = new PoliceStInfo();
-					List<PoliceStInfo> policeCheckInfos = firetableMapper.getPoliceStInfoByDay(StringToDate.singleDate(date),policeid);
+					List<PoliceStInfo> policeCheckInfos = firetableMapper.getPoliceStInfoByDay(StringToDate.singleDate(day),policeid);
 					String coverage = DivisionUtil.ReturnDecimals(Integer.valueOf(policeCheckInfos.get(0).getTablesum()), unitsum.get(0).getUnitsum());//得出覆盖率 =表册数/场所总数
 					dataInfo.setCoverage(coverage);
 					dataInfo.setUnitsum(unitsum.get(0).getUnitsum());
-					dataInfo.setTime(date);
+					dataInfo.setTime(day);
 					dataInfo.setTablesum(policeCheckInfos.get(0).getTablesum());
 					dataInfo.setPoliceStation(policeCheckInfos.get(0).getPoliceStation());
 					Info.add(dataInfo);
-					
 				}
 				return Info;
 			}

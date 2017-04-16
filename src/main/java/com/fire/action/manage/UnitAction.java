@@ -2,13 +2,13 @@ package com.fire.action.manage;
 
 import com.fire.service.UnitService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by Jbroken on 2017/2/7.
  */
-@Controller
+@RestController
 public class UnitAction {
     @Autowired
     UnitService unitService;
@@ -22,4 +22,5 @@ public class UnitAction {
     public int deleteUnit(int unitid){
         return unitService.deleteUnitById(unitid);
     }
+
 }
