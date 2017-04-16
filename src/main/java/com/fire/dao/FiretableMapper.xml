@@ -381,10 +381,7 @@
   <select id="getPoliceStInfoByDay" parameterType="map" resultType="com.fire.po.PoliceStInfo">
   	select policestation.policeStation,count(*) as tablesum,firetable.checkdate as time 
   		from policestation,unit,firetable 
-  			where unit.policeid = policestation.policeid = #{policeid.policeid} and firetable.checkdate = #{date} and unit.unitid = firetable.unitid
+  			where policestation.policeid = #{policeid.policeid} and firetable.checkdate = #{date} and unit.unitid = firetable.unitid
   </select>
-<sql id="selectPoliceStation">
-
-</sql>
 
 </mapper>

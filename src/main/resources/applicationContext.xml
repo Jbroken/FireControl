@@ -7,10 +7,10 @@
     <context:annotation-config/>
     <!--配置数据源-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="url" value="jdbc:mysql://112.74.37.240:3306/firecontrol?useUnicode=true&amp;characterEncoding=UTF-8"></property>
-        <property name="username" value="root"></property>
-        <property name="password" value="25p3zjif"></property>
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://112.74.37.240:3306/firecontrol?useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="25p3zjif"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="1"/>
         <property name="minIdle" value="1"/>
@@ -28,17 +28,17 @@
     </bean>
     <!--Spring和Mybatis整合-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"></property>
+        <property name="dataSource" ref="dataSource"/>
         <!--自动扫描mapping.xml文件-->
         <property name="mapperLocations" value="classpath*:com/fire/dao/*.xml"/>
     </bean>
     <!--DAO接口所在包名，Spring会自动查找其下的类-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
-        <property name="basePackage" value="com.fire.dao"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.fire.dao"/>
     </bean>
     <!--事物管理-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"></property>
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 </beans>

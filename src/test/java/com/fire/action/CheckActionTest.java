@@ -1,5 +1,6 @@
-package com.fire.action.manage;
+package com.fire.action;
 
+import com.fire.action.manage.CheckAction;
 import com.fire.po.FiretableInformation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,8 +9,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by BZhao on 2017/4/6.

@@ -3,6 +3,7 @@ package com.fire.action.manage;
 import java.util.List;
 
 import com.fire.po.Unitid;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,10 +23,13 @@ public class TaskAction {
 	 * @return
 	 */
 	@RequestMapping("addTime")
-	public void ReleaseTask(UnitListForm unitidform) {
+	public JSONObject ReleaseTask(UnitListForm unitidform) {
+		JSONObject jsonObject = new JSONObject();
 		for (Unitid unitid : unitidform.getUnitid()) {
 			taskService.addTasktime(unitid);
 		}
+		jsonObject.put("result", "success");
+		return jsonObject;
 	}
 
 	/**

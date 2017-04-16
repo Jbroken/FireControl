@@ -20,11 +20,22 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
+	<style type="text/css">
+		.layout{
+			width:70%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.dialog{
+			width:400px;
+			height:200px;
+			text-align:center;
+		}
+	</style>
 </head>
 
 <body>
-<div class="easyui-layout"
-	 style="width:70%;margin-left: auto;margin-right: auto;">
+<div class="easyui-layout layout">
 	<table id="dg"></table>
 </div>
 <script type="text/javascript">
@@ -48,6 +59,9 @@
 						pagination : true, //数据网格（datagrid）底部显示分页工具栏。
 						rownumbers : true, //行号
 						data : data.slice(0, 10),
+						idField:'',
+						treeField:'',
+						animate:true,
 						frozenColumns : [ [ //冻结列特性 ,不要与fitColumns 特性一起使用
 							{
 								field : 'ck',
@@ -177,8 +191,7 @@
 		});
 	}
 </script>
-<div id="updateTask" class="easyui-dialog" title="修改检查周期"
-	 style="width:400px;height:200px;text-align:center;"
+<div id="updateTask" class="easyui-dialog dialog" title="修改检查周期"
 	 data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true">
 	<br />
 	<form action="" id="updateTaskTable">
