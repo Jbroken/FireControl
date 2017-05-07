@@ -5,7 +5,7 @@ import com.fire.service.CheckService;
 import com.fire.service.TableService;
 import com.fire.service.UnitService;
 import com.fire.utils.StringToDate;
-import com.fire.utils.dateUtil;
+import com.fire.utils.DateUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class APPInterfaceAction {
@@ -32,7 +31,7 @@ public class APPInterfaceAction {
 	 * 
 	 * @param policestation
 	 * @param type
-	 *            为0,1,2 分别是常规检查,整改检查,举报检查
+	 *  为0,1,2 分别是常规检查,整改检查,举报检查
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
@@ -40,7 +39,7 @@ public class APPInterfaceAction {
 	@ResponseBody
 	public JSONObject getUnitByType(String policestation, int type){
 		if (type == 0) {
-			return checkService.findType(policestation);
+			return checkService.findDailyCheck(policestation);
 		} else if (type == 1) {
 			return checkService.findRectifyCheck(policestation);
 		} else {
@@ -55,7 +54,7 @@ public class APPInterfaceAction {
 	 */
 	@RequestMapping(value = "getUnitById")
 	@ResponseBody
-	public List<UnitMasterImfor> getUnitInformationById(int unitid) {
+	public List<UnitMasterInfo> getUnitInformationById(int unitid) {
 
 		return checkService.getUnitInformation(unitid);
 	}
@@ -69,13 +68,18 @@ public class APPInterfaceAction {
 	@ResponseBody
 	public JSONObject getCheckdateById(Integer unitid) {
 
-		JSONObject jsonObject = new JSONObject();
+		JSONObject result = new JSONObject();
+		JSONObject tableDate = new JSONObject();
 
-		List<CheckData> time = checkService.getCheckdateById(unitid);
+		List<CheckData> dailyCheck = checkService.getCheckdateById(unitid);
+		List<TroubleCheckDate> troubleCheckDates = tableService.getTroubletableCheckDate(unitid);
 
-		jsonObject.put("result", time);
+		tableDate.put("dailyCheck",dailyCheck);
+		tableDate.put("troubleCheck",troubleCheckDates);
 
-		return jsonObject;
+		result.put("result", tableDate);
+
+		return result;
 	}
 
 	/**
@@ -87,7 +91,7 @@ public class APPInterfaceAction {
 	 */
 	@RequestMapping(value = "getTableInformation")
 	public String getTableInformation(Model model, String checkdate,String firetableid) {
-		model.addAttribute("table", checkService.findtableByDate(StringToDate.singleDate(checkdate), firetableid));
+		model.addAttribute("table", checkService.findtableById(firetableid));
 		return "APPInterfaceJsp/check";
 	}
 
@@ -105,9 +109,9 @@ public class APPInterfaceAction {
 
 		Date startTime = StringToDate.singleDate(task.get(0).getSettime());	//当前场所所设周期的开始时间
 		//周期结束时间
-		Date endTime = StringToDate.singleDate(dateUtil.getSpecifiedDayAfter(task.get(0).getSettime(), task.get(0).getTasktime()));
+		Date endTime = StringToDate.singleDate(DateUtil.getSpecifiedDayAfter(task.get(0).getSettime(), task.get(0).getTasktime()));
 		//表册上传时间
-		Date nowTime = StringToDate.singleDate(dateUtil.getNowDate());
+		Date nowTime = StringToDate.singleDate(DateUtil.getNowDate());
 		// 未超期
 		if (startTime.getTime() <nowTime.getTime() && nowTime.getTime() < endTime.getTime()) {
 			//更新场所状态
@@ -122,10 +126,10 @@ public class APPInterfaceAction {
 			return jsonObject;
 		} else {
 			// 将当前日期设为新的起始日期
-			checkService.updateSetTime(dateUtil.getNowDate(),
+			checkService.updateSetTime(DateUtil.getNowDate(),
 					firetable.getUnitid());
 
-			firetable.setCheckdate(StringToDate.singleDate(dateUtil
+			firetable.setCheckdate(StringToDate.singleDate(DateUtil
 					.getNowDate()));
 			checkService.UploadCheckRecord(firetable);
 			// 上传成功，更新商铺状态为已检查
@@ -147,7 +151,7 @@ public class APPInterfaceAction {
 	 */
 	@RequestMapping(value = "uploadBusinessInfor")
 	@ResponseBody
-	public int uploadBusinessInfor(Checkrecord checkrecord) {
+	public int uploadBusinessInfo(Checkrecord checkrecord) {
 
 		return checkService.uploadBusinessInfor(checkrecord);
 	}

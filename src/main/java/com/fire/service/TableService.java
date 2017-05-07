@@ -1,22 +1,22 @@
 package com.fire.service;
 
+import com.fire.dao.TroubletableMapper;
+import com.fire.po.TroubleCheckDate;
+import com.fire.po.Troubletable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fire.dao.FiretableMapper;
 import com.fire.dao.ReporttableMapper;
 import com.fire.dao.TransfertableMapper;
-import com.fire.dao.TroubletableMapper;
 import com.fire.po.Reporttable;
 import com.fire.po.Transfertable;
-import com.fire.po.Troubletable;
-import com.fire.utils.dateUtil;
+import com.fire.utils.DateUtil;
+
+import java.util.List;
 
 @Service
 public class TableService {
 
-	@Autowired
-	FiretableMapper firetableMapper;
 	@Autowired
 	ReporttableMapper reporttableMapper;
 	@Autowired
@@ -39,8 +39,11 @@ public class TableService {
 	public int uploadTransferInfo(Transfertable transfertable) {
 		// TODO Auto-generated method stub
 		// 取当前上传时间为填表时间
-		transfertable.setTransferdate(dateUtil.getNowDate());
+		transfertable.setTransferdate(DateUtil.getNowDate());
 		return transfertableMapper.insert(transfertable);
 	}
 
+	public List<TroubleCheckDate> getTroubletableCheckDate(Integer unitid) {
+		return troubletableMapper.getTroubletableCheckDate(unitid);
+	}
 }

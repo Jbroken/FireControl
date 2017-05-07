@@ -1,6 +1,6 @@
 package com.fire.po;
 
-public class UnitMasterImfor {
+public class UnitMasterInfo {
 	
 	private Integer unitid;
 	
@@ -11,6 +11,12 @@ public class UnitMasterImfor {
 	private String master;
 	
 	private String address;
+
+	private String floors;
+
+	private String height;
+
+	private String unitproperty;
 
 	public Integer getUnitid() {
 		return unitid;
@@ -51,6 +57,28 @@ public class UnitMasterImfor {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-	
+
+	public String getFloors() {
+		return floors;
+	}
+
+	public void setFloors(String floors) {
+		this.floors = floors;
+	}
+
+	public String getHeight() {
+		return height;
+	}
+
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+	public String getUnitproperty() {
+		return unitproperty;
+	}
+
+	public void setUnitproperty(String unitproperty) {
+		this.unitproperty = unitproperty;
+	}
 }

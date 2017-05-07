@@ -2,17 +2,19 @@ package com.fire.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * 
- * @param 日期工具
+ * 日期工具
+ * @param
  * @author Broken
  *
  */
-public class dateUtil {
+public class DateUtil {
 	/**
 	 * Calender类获得指定日期加几天
 	 * @param specified 为之前的日期
@@ -99,5 +101,30 @@ public class dateUtil {
 		calendar.setFirstDayOfWeek(Calendar.MONDAY);
 		calendar.setTime(date);		
 		return calendar.get(Calendar.WEEK_OF_YEAR);
+	}
+
+	/**
+	 * 返回当前日期
+	 * 格式为'yyyy-MM-dd'
+	 * @return
+	 */
+	public static String getNowDay(){
+		return LocalDate.now().toString();
+	}
+
+	/**
+	 * 返回date类型的日期
+	 * 格式 yyyy-MM-dd
+	 * @param date
+	 * @return
+	 */
+	public static Date stringToDate(String date) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.parse(date);
+	}
+
+	public static void main(String[] args) {
+		String a = getNowDay();
+		System.out.println(a);
 	}
 }

@@ -25,6 +25,8 @@
     <mvc:resources location= "/images/" mapping="/images/**" />
     <mvc:resources location="/manage/" mapping="/manage/**"/>
     <mvc:resources location="/APPInterfaceJsp/" mapping="/APPInterfaceJsp/**"/>
+    <mvc:resources location="/plugins/" mapping="/plugins/**" />
+
     <!-- ÅäÖÃÊÓÍ¼½âÎöÆ÷ -->
     <bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">

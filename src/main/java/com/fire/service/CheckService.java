@@ -1,6 +1,5 @@
 package com.fire.service;
 
-import java.util.Date;
 import java.util.List;
 
 import net.sf.json.JSONArray;
@@ -23,10 +22,10 @@ import com.fire.po.Task;
 import com.fire.po.TreeModel;
 import com.fire.po.UnitChildren;
 import com.fire.po.UnitInformation;
-import com.fire.po.UnitMasterImfor;
+import com.fire.po.UnitMasterInfo;
 import com.fire.po.UnitType;
 import com.fire.po.Unitname;
-import com.fire.utils.dateUtil;
+import com.fire.utils.DateUtil;
 
 @Service
 public class CheckService {
@@ -111,7 +110,7 @@ public class CheckService {
 	 * @param policestation
      * @return
 	 */
-	public JSONObject findType(String policestation) {
+	public JSONObject findDailyCheck(String policestation) {
 		// TODO Auto-generated method stub
 		// 由派出所得到该派出所下的所有商铺类型
 		List<UnitChildren> unitType = unitMapper.getType(policestation);
@@ -126,13 +125,13 @@ public class CheckService {
 			// 计算剩余天数
 			for (int j = 0; j < unitInformation.size(); j++) {
 
-				String nowDate = dateUtil.getNowDate();
+				String nowDate = DateUtil.getNowDate();
 
-				String endDate = dateUtil.getSpecifiedDayAfter(unitInformation
+				String endDate = DateUtil.getSpecifiedDayAfter(unitInformation
 						.get(j).getSetTime(), unitInformation.get(j)
 						.getTasktime());// 最后期限
 				// 如果超期就为负数
-				long day = dateUtil.minusDate(endDate, nowDate);
+				long day = DateUtil.minusDate(endDate, nowDate);
 				unitInformation.get(j).setDay(day);
 			}
 			// 判断商铺是否存在
@@ -150,7 +149,7 @@ public class CheckService {
 		return jObject;
 	}
 
-	public List<UnitMasterImfor> getUnitInformation(int unitid) {
+	public List<UnitMasterInfo> getUnitInformation(int unitid) {
 		// TODO Auto-generated method stub
 		return unitMapper.getUnitInformation(unitid);
 	}
@@ -161,10 +160,8 @@ public class CheckService {
 		return firetableMapper.getCheckdateById(unitid);
 	}
 
-	public List<FiretableInformation> findtableByDate(Date date,
-			String firetableid) {
-			List<FiretableInformation> tableInfo = firetableMapper
-					.getTableByDate(date, firetableid);
+	public List<FiretableInformation> findtableById(String firetableid) {
+			List<FiretableInformation> tableInfo = firetableMapper.getTableById(firetableid);
 			try {
 				List<Picture> picture = pictureMapper.findPictureById(firetableid);
 				if(picture != null){

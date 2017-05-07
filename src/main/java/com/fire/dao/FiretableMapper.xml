@@ -378,10 +378,23 @@
       tasktime = #{tasktime,jdbcType=INTEGER}
     where firetableid = #{firetableid,jdbcType=VARCHAR}
   </update>
-  <select id="getPoliceStInfoByDay" parameterType="map" resultType="com.fire.po.PoliceStInfo">
-  	select policestation.policeStation,count(*) as tablesum,firetable.checkdate as time 
-  		from policestation,unit,firetable 
-  			where policestation.policeid = #{policeid.policeid} and firetable.checkdate = #{date} and unit.unitid = firetable.unitid
+  <select id="getPoliceStInfoByDay"  resultType="com.fire.po.PoliceStInfo">
+  	SELECT c.policeStation,count(d.firetableid)/count(c.unitid) as coverage,count(d.firetableid) AS tablesum
+  	  from (
+  	    SELECT unitid,policeStation FROM ((SELECT policeStation,policeid FROM policestation WHERE policestation.policeid = #{Policestationid.policeid,jdbcType=INTEGER}) AS a
+          INNER JOIN (SELECT unitid,policeid FROM unit WHERE policeid = #{Policestationid.policeid,jdbcType=INTEGER}) AS b ON a.policeid = b.policeid)) AS c
+           c v  LEFT JOIN (SELECT firetableid,unitid,checkdate FROM firetable WHERE checkdate = #{date,jdbcType=DATE}) AS d ON c.unitid = d.unitid
   </select>
 
+  <select id="getUnitInformation" resultType="com.fire.po.UnitMasterInfo" parameterType="java.lang.Integer">
+    SELECT a.policeStation as policestation,b.unitid,b.unitname,b.address,b.address,b.floors,b.height,b.master,b.unitproperty
+      FROM policestation AS a
+        INNER JOIN (SELECT * FROM unit WHERE unitid = #{unitid})
+  </select>
+
+  <select id="getTableById" parameterType="java.lang.String" resultType="com.fire.po.FiretableInformation">
+    SELECT b.unitid,b.unitname,b.unitproperty,b.master,b.height,b.floors,b.address,b.area,a.checkdate,a.otherchecker,a.checker,a.remarks,a.problem
+      FROM (SELECT unitid,checkdate,checker,otherchecker,remarks,problem FROM firetable WHERE firetableid=#{firetableid}) AS a
+        LEFT JOIN unit AS b ON a.unitid = b.unitid
+  </select>
 </mapper>

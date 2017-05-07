@@ -50,9 +50,8 @@ public interface UnitMapper {
   	//根据派出所得到商铺信息
     @Select("select unit.unitproperty as type from unit,policestation where  unit.policeid = policestation.policeid and policestation.policeStation = #{policestation} group by unitproperty")
 	List<UnitChildren> getType(String policestation);
-    
-    @Select("select unit.unitid,policestation.policeStation as policestation,unit.unitname,unit.master,unit.address from unit JOIN policestation where unit.policeid = policestation.policeid and unit.unitid = #{unitid}")
-	List<UnitMasterImfor> getUnitInformation(int unitid);
+
+	List<UnitMasterInfo> getUnitInformation(int unitid);
 
     //根据派出所得到商铺信息
     @Select("select unit.unitid as id,unit.rectifyid,unit.reportid,unit.unitname as title,unit.checkstate as state,policestation.policeid,unit.master,unit.address,unit.checkType as checktype,unit.report,task.SetTime,task.Tasktime from policestation,unit,task where unit.policeid = policestation.policeid and policestation.policeStation = #{policestation} and unit.unitid = task.unitid AND unit.unitproperty= #{type}")

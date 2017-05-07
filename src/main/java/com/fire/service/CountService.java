@@ -17,21 +17,17 @@ import org.springframework.stereotype.Service;
 
 import com.fire.dao.FiretableMapper;
 import com.fire.dao.UnitMapper;
-import com.fire.po.CheckCondition;
-import com.fire.po.FiretableAllColumn;
 import com.fire.po.PersonalCondition;
 import com.fire.po.PoliceCheckInfo;
 import com.fire.po.PoliceStInfo;
 import com.fire.po.PolicestationList;
 import com.fire.po.Policestationid;
-import com.fire.po.ProblemCount;
 import com.fire.po.SingleUnit;
 import com.fire.po.TestModel;
-import com.fire.po.UnitChange;
 import com.fire.po.UnitInformation;
 import com.fire.utils.DivisionUtil;
 import com.fire.utils.StringToDate;
-import com.fire.utils.dateUtil;
+import com.fire.utils.DateUtil;
 
 @Service
 public class CountService {
@@ -143,51 +139,6 @@ public class CountService {
 		return result;
 	}
 
-	/***
-	 * 问题统计
-	 * 分项统计各类
-	 * @param
-	 * @return
-	 */
-
-	public List<FiretableAllColumn> getProblemCount() {
-
-		// 得到所有字段
-		List<FiretableAllColumn> firetableAllColumn = firetableMapper.getAllColumn();
-		
-		for (int m = 0; m < firetableAllColumn.size(); m++) {
-			List<ProblemCount> problemCount = firetableMapper.getProblemRate(firetableAllColumn.get(m).getColumn_name());
-			if (problemCount.get(0).getFirst() != 0) {
-				firetableAllColumn.get(m).setFirst_rate(
-						DivisionUtil.Division(problemCount.get(0).getFirst(),
-								problemCount.get(0).getTablesum()));
-			}
-			if (problemCount.get(0).getSecond() != 0) {
-				firetableAllColumn.get(m).setSecond_rate(
-						DivisionUtil.Division(problemCount.get(0).getSecond(),
-								problemCount.get(0).getTablesum()));
-			}
-			if (problemCount.get(0).getThird() != 0) {
-				firetableAllColumn.get(m).setThird_rate(
-						DivisionUtil.Division(problemCount.get(0).getThird(),
-								problemCount.get(0).getTablesum()));
-			}
-			if (problemCount.get(0).getFifth() != 0) {
-				firetableAllColumn.get(m).setFourth_rate(
-						DivisionUtil.Division(problemCount.get(0).getFifth(),
-								problemCount.get(0).getTablesum()));
-			}
-			if (problemCount.get(0).getFifth() != 0) {
-				firetableAllColumn.get(m).setFifth_rate(
-						DivisionUtil.Division(problemCount.get(0).getFifth(),
-								problemCount.get(0).getTablesum()));
-			}
-		}
-
-		return firetableAllColumn;
-	}
-
-
 	public List<PersonalCondition> CheckPersonalCondition(String checker) {
 		// TODO Auto-generated method stub
 		return firetableMapper.CountPersonalCondition(checker);
@@ -220,52 +171,40 @@ public class CountService {
 	public List getPoliceStInfo(PolicestationList policestationList, Policestationid policeid) {
 		// TODO Auto-generated method stub		
 		List<PoliceCheckInfo> unitsum= firetableMapper.getUnitSum(policeid);
-		try {
-			if(policestationList.getDatetype().equals("1")){
-				//根据结束日期和天数，得到日期列表
-				List<String> dateList = new ArrayList<String>();
-				for(int i=Integer.valueOf(policestationList.getNumber())-1;i>0;i--){
-					String date = dateUtil.date(policestationList.getEnddate(),i);
-					dateList.add(date);
-				}
-				dateList.add(policestationList.getEnddate());
-				List<PoliceStInfo> Info = new ArrayList<PoliceStInfo>();
-				for (String day : dateList) {
-					PoliceStInfo dataInfo = new PoliceStInfo();
-					List<PoliceStInfo> policeCheckInfos = firetableMapper.getPoliceStInfoByDay(StringToDate.singleDate(day),policeid);
-					String coverage = DivisionUtil.ReturnDecimals(Integer.valueOf(policeCheckInfos.get(0).getTablesum()), unitsum.get(0).getUnitsum());//得出覆盖率 =表册数/场所总数
-					dataInfo.setCoverage(coverage);
-					dataInfo.setUnitsum(unitsum.get(0).getUnitsum());
-					dataInfo.setTime(day);
-					dataInfo.setTablesum(policeCheckInfos.get(0).getTablesum());
-					dataInfo.setPoliceStation(policeCheckInfos.get(0).getPoliceStation());
-					Info.add(dataInfo);
-				}
-				return Info;
+		if(policestationList.getDatetype().equals("1")){
+			//根据结束日期和天数，得到日期列表
+			List<String> dateList = new ArrayList<String>();
+			for(int i=Integer.valueOf(policestationList.getNumber())-1;i>0;i--){
+				String date = DateUtil.date(policestationList.getEnddate(),i);
+				dateList.add(date);
 			}
-			//按周查询派出所检查情况
-			if (policestationList.getDatetype().equals("2")) {
-				List<PoliceStInfo> policeCheckInfos = firetableMapper.getPoliceStInfoByWeek(StringToDate.singleDate(policestationList.getEnddate()),policestationList.getNumber(),policeid);
-				for (int i = 0; i < policeCheckInfos.size(); i++) {
-					String coverage = DivisionUtil.ReturnDecimals(Integer.valueOf(policeCheckInfos.get(i).getTablesum()),unitsum.get(0).getUnitsum());//得出覆盖率 =表册数/场所总数
-					policeCheckInfos.get(i).setCoverage(coverage);
-					policeCheckInfos.get(i).setUnitsum(unitsum.get(0).getUnitsum());
-				}
-				return policeCheckInfos;
+			dateList.add(policestationList.getEnddate());
+			List<PoliceStInfo> Info = new ArrayList<PoliceStInfo>();
+			for (String day : dateList) {
+				PoliceStInfo policeCheckInfo = firetableMapper.getPoliceStInfoByDay(StringToDate.singleDate(day),policeid);
+				policeCheckInfo.setTime(day);
+				Info.add(policeCheckInfo);
 			}
-			//按月查询派出所检查情况
-			List<PoliceStInfo> policeCheckInfos = firetableMapper.getPoliceStInfoByMouth(StringToDate.singleDate(policestationList.getEnddate()),policestationList.getNumber(),policeid);
-				for (int i = 0; i < policeCheckInfos.size(); i++) {
-					String coverage = DivisionUtil.ReturnDecimals(Integer.valueOf(policeCheckInfos.get(i).getTablesum()),unitsum.get(0).getUnitsum());//得出覆盖率 =表册数/场所总数
-					policeCheckInfos.get(i).setCoverage(coverage);
-					policeCheckInfos.get(i).setUnitsum(unitsum.get(0).getUnitsum());
-				}
-				return policeCheckInfos;
-		
-		} catch (Exception e) {
-			// TODO: handle exception
-			return null;
+			return Info;
 		}
+		//按周查询派出所检查情况
+		if (policestationList.getDatetype().equals("2")) {
+			List<PoliceStInfo> policeCheckInfos = firetableMapper.getPoliceStInfoByWeek(StringToDate.singleDate(policestationList.getEnddate()),policestationList.getNumber(),policeid);
+			for (int i = 0; i < policeCheckInfos.size(); i++) {
+				String coverage = DivisionUtil.ReturnDecimals(Integer.valueOf(policeCheckInfos.get(i).getTablesum()),unitsum.get(0).getUnitsum());//得出覆盖率 =表册数/场所总数
+				policeCheckInfos.get(i).setCoverage(coverage);
+				policeCheckInfos.get(i).setUnitsum(unitsum.get(0).getUnitsum());
+			}
+			return policeCheckInfos;
+		}
+		//按月查询派出所检查情况
+		List<PoliceStInfo> policeCheckInfos = firetableMapper.getPoliceStInfoByMouth(StringToDate.singleDate(policestationList.getEnddate()),policestationList.getNumber(),policeid);
+		for (int i = 0; i < policeCheckInfos.size(); i++) {
+			String coverage = DivisionUtil.ReturnDecimals(Integer.valueOf(policeCheckInfos.get(i).getTablesum()),unitsum.get(0).getUnitsum());//得出覆盖率 =表册数/场所总数
+			policeCheckInfos.get(i).setCoverage(coverage);
+			policeCheckInfos.get(i).setUnitsum(unitsum.get(0).getUnitsum());
+		}
+		return policeCheckInfos;
 	}
 
 }

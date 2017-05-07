@@ -100,7 +100,7 @@
 			<hr />
 			<p align="right">(公安派出所印章)</p>
 			<p align="right">
-				<input id="checkdate" class="input_number" disabled="disabled"
+				<input id="checkdate" type="text" class="input_number" disabled="disabled"
 					style="width: 80px;" />
 			</p>
 			<hr />

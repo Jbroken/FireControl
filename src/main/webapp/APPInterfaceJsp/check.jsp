@@ -17,98 +17,122 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1,user-scalable=no"
 	name="viewport">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/tablehead.css" />
-<link rel="stylesheet" type="text/css" href="css/mui.min.css" >
-<script type="text/javascript" src="js/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/tablehead.css" />
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/mui.min.css" >
+<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 </head>
 
 <body>
 	<div class="container-fluid table-responsive">
 		<form action="">
-			<c:forEach items="${table}" var="tab">
 				<div class="header">
 					<%--<div class="header_policestation"></div>--%>
 					<div class="header_title">公安派出所日常消防监督检查记录</div>
-					<div class="header_number">编号：[${tab.unitid}]第${tab.firetableid}号</div>
+					<div class="header_number">编号：[${table.unitid}]第${tab.firetableid}号</div>
 				</div>
 				<div class="check table">
 					<ul class="mui-table-view">
     					<li class="mui-table-view-cell mui-media">
             				<div class="mui-media-body">
                 				单位（场地）名称
-                				<p class='mui-ellipsis'>${tab.unitname}</p>
+                				<p class='mui-ellipsis'>${table.unitname}</p>
             				</div>
     					</li>
     					<li class="mui-table-view-cell mui-media">
             				<div class="mui-media-body">
               					  法定代表人/主要负责人
-                				<p class='mui-ellipsis'>${tab.master}</p>
+                				<p class='mui-ellipsis'>${table.master}</p>
             				</div>
     					</li>
 					    <li class="mui-table-view-cell mui-media">
 					    	<div class="mui-media-body">
 					    		地址
-					    		<p class='mui-ellipsis'>${tab.address}</p>
+					    		<p class='mui-ellipsis'>${table.address}</p>
 					   		</div>
 					    </li>
 					    <li class="mui-table-view-cell mui-media">
 					    	<div class="mui-media-body">
 					    		单位性质
-					    		<p class='mui-ellipsis'>${tab.unitproperty}</p>
+					    		<p class='mui-ellipsis'>${table.unitproperty}</p>
 					   		</div>
 					    </li>
 					    <li class="mui-table-view-cell mui-media">
 					    	<div class="mui-media-body">
 					    		使用的建筑面积(m²)
-					    		<p class='mui-ellipsis'>${tab.area}</p>
+					    		<p class='mui-ellipsis'>${table.area}</p>
 					   		</div>
 					    </li>
 					    <li class="mui-table-view-cell mui-media">
 					    	<div class="mui-media-body">
 					    		使用的建筑具体层数
-					    		<p class='mui-ellipsis'>${tab.floors}</p>
+					    		<p class='mui-ellipsis'>${table.floors}</p>
 					   		</div>
 					    </li>
 					    <li class="mui-table-view-cell mui-media">
 					    	<div class="mui-media-body">
 					    		所在建筑高度(m)
-					    		<p class='mui-ellipsis'>${tab.height}</p>
+					    		<p class='mui-ellipsis'>${table.height}</p>
 					   		</div>
 					    </li>
 					    <li class="mui-table-view-cell mui-media">
 					    	<div class="mui-media-body">
 					    		检查人员
-					    		<p class='mui-ellipsis'>${tab.checker}</p>
+					    		<p class='mui-ellipsis'>${table.checker}</p>
 					   		</div>
 					    </li>
 					    <li class="mui-table-view-cell mui-media">
 					    	<div class="mui-media-body">
 					    		单位随同检查人员
-					    		<p class='mui-ellipsis'>${tab.otherchecker}</p>
+					    		<p class='mui-ellipsis'>${table.otherchecker}</p>
 					   		</div>
 					    </li>
 					    <li class="mui-table-view-cell mui-media">
 					    	<div class="mui-media-body">
 					    		检查日期
-					    		<p class='mui-ellipsis'>${tab.checkdate}</p>
+					    		<p class='mui-ellipsis'>${table.checkdate}</p>
 					   		</div>
 					    </li>
 					    <li class="mui-table-view-cell mui-media">
 					    	<div class="mui-media-body">
 					    		存在的问题
-					    		<p class='mui-ellipsis'>${tab.problem}</p>
+					    		<p class='mui-ellipsis'>${table.problem}</p>
 					   		</div>
 					    </li>
 					    <li class="mui-table-view-cell mui-media">
 					    	<div class="mui-media-body">
 					    		备注
-					    		<p class='mui-ellipsis'>${remarks}</p>
+					    		<p class='mui-ellipsis'>${table.remarks}</p>
 					   		</div>
 					    </li>
+						<c:choose>
+							<c:when test="${table.picture[0].PicType == 'CheckerPic'}">
+								<li class="mui-table-view-cell mui-media">
+					    			<div class="mui-media-body">
+					    				身份信息
+					    		 		<img class="mui-media-object" src="${table.picture[0].pictureurl}">
+					   				</div>
+					    		</li>
+							</c:when>
+							<c:when test="${table.picture[0].PicType == 'UnitPic'}">
+								<li class="mui-table-view-cell mui-media">
+					    			<div class="mui-media-body">
+					    				场所信息
+					    		 		<img class="mui-media-object" src="${table.picture[0].pictureurl}">
+					   				</div>
+					    		</li>
+							</c:when>
+							<c:when test="${table.picture[0].PicType == 'SignPic'}">
+								<li class="mui-table-view-cell mui-media">
+					    			<div class="mui-media-body">
+					    				签名
+					    		 		<img class="mui-media-object" src="${table.picture[0].pictureurl}">
+					   				</div>
+					    		</li>
+							</c:when>
+						</c:choose>
 					</ul>
 				</div>
-			</c:forEach>
 		</form>
 	</div>
 </body>
