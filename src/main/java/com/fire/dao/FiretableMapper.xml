@@ -381,9 +381,9 @@
   <select id="getPoliceStInfoByDay"  resultType="com.fire.po.PoliceStInfo">
   	SELECT c.policeStation,count(d.firetableid)/count(c.unitid) as coverage,count(d.firetableid) AS tablesum
   	  from (
-  	    SELECT unitid,policeStation FROM ((SELECT policeStation,policeid FROM policestation WHERE policestation.policeid = #{Policestationid.policeid,jdbcType=INTEGER}) AS a
+  	    SELECT unitid,policeStation FROM ((SELECT policeStation,policeid FROM policestation WHERE policeid = #{Policestationid.policeid,jdbcType=INTEGER}) AS a
           INNER JOIN (SELECT unitid,policeid FROM unit WHERE policeid = #{Policestationid.policeid,jdbcType=INTEGER}) AS b ON a.policeid = b.policeid)) AS c
-           c v  LEFT JOIN (SELECT firetableid,unitid,checkdate FROM firetable WHERE checkdate = #{date,jdbcType=DATE}) AS d ON c.unitid = d.unitid
+            LEFT JOIN (SELECT firetableid,unitid,checkdate FROM firetable WHERE checkdate = #{date,jdbcType=DATE}) AS d ON c.unitid = d.unitid
   </select>
 
   <select id="getUnitInformation" resultType="com.fire.po.UnitMasterInfo" parameterType="java.lang.Integer">
@@ -396,5 +396,35 @@
     SELECT b.unitid,b.unitname,b.unitproperty,b.master,b.height,b.floors,b.address,b.area,a.checkdate,a.otherchecker,a.checker,a.remarks,a.problem
       FROM (SELECT unitid,checkdate,checker,otherchecker,remarks,problem FROM firetable WHERE firetableid=#{firetableid}) AS a
         LEFT JOIN unit AS b ON a.unitid = b.unitid
+  </select>
+
+  <insert id="insertExcelData" parameterType="java.util.List" useGeneratedKeys="true">
+    INSERT INTO unit(branchid,policeid,unitname,master,address,unitproperty,area,floors,height)
+      VALUES
+      <if test="list.size>0">
+        <foreach collection="list" item="excelData" separator=",">
+          (
+            #{excelData.branchid},
+            #{excelData.policeid},
+            #{excelData.unitname},
+            #{excelData.master},
+            #{excelData.address},
+            #{excelData.unitproperty},
+            #{excelData.area},
+            #{excelData.floors},
+            #{excelData.height}
+          )
+        </foreach>
+      </if>
+  </insert>
+
+  <select id="CountPersonalByChecker" resultType="com.fire.po.PersonalCondition">
+    SELECT DATE_FORMAT(checkdate,'%Y%m')AS time,count(DATE_FORMAT(checkdate,'%Y%m')) AS count,checker
+      FROM firetable WHERE checker = #{checker} GROUP BY time
+  </select>
+
+  <select id="CountPersonalByUserid" resultType="com.fire.po.PersonalCondition">
+    SELECT DATE_FORMAT(checkdate,'%Y%m')AS time,count(DATE_FORMAT(checkdate,'%Y%m')) AS count,b.checker
+      FROM firetable AS a INNER JOIN (select userid,relname AS checker FROM user WHERE userid = #{userid}) AS b ON a.userid = b.userid GROUP BY time
   </select>
 </mapper>

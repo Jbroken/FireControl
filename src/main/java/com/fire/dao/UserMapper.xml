@@ -360,6 +360,10 @@
       relname = #{relname,jdbcType=VARCHAR},
       userlimit = #{userlimit,jdbcType=VARCHAR},
       lastlogin = #{lastlogin,jdbcType=TIMESTAMP}
-    where userid = #{userid,jdbcType=INTEGER}
+    where userid = #insertUser{userid,jdbcType=INTEGER}
   </update>
+
+  <insert id="insertUser" parameterType="com.fire.po.User">
+
+  </insert>
 </mapper>

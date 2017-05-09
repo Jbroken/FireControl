@@ -10,14 +10,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<base href="<%=basePath%>">
 	<meta http-equiv="X-UA-Compatible" content="IE=8">
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="css/easyui.css">
-	<link rel="stylesheet" type="text/css" href="css/icon.css">
-	<link rel="stylesheet" type="text/css" href="css/demo.css">
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
-	<script type="text/javascript" src="js/echarts.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/easyui.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/icon.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/demo.css">
+	<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/jquery.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/echarts.min.js"></script>
 </head>
 <body>
 <div class="easyui-layout" style="width:80%;margin-left: auto;margin-right: auto;">
@@ -60,6 +60,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<div id="main" style="width: 100%;height:100%;"></div>
 </div>
-<script type="text/javascript" src="js/policeCheck.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/policeCheck.js"></script>
 </body>
 </html>

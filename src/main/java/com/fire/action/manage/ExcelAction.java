@@ -38,6 +38,8 @@ public class ExcelAction {
 
 		List<Map<String, String>> data = ExcelImportUtil.parseExcel(fis);
 
+		unitService.insertExcelData(data);
+
 		Map<String, String> map = new HashMap<String, String>();
 		// 循环上传数据
 		for (int i = 0; i < data.size(); i++) {

@@ -1,5 +1,6 @@
 package com.fire.service;
 
+import com.fire.po.PoliceStation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,16 +11,13 @@ import com.fire.po.Police;
 import com.fire.po.PoliceInfo;
 import com.fire.utils.DivisionUtil;
 
+import java.util.List;
+
 @Service
 public class PoliceManageService {
 
 	@Autowired
 	PoliceMapper policeMapper;
-	@Autowired
-	TaskMapper taskMapper;
-	@Autowired
-	FiretableMapper firetableMapper;
-
 
 	public PoliceInfo findPoliceByName(String tel) {
 
@@ -43,4 +41,7 @@ public class PoliceManageService {
 
 	}
 
+    public List<PoliceStation> getPoliceStationList() {
+        return policeMapper.getPoliceStationList();
+    }
 }

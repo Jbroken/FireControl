@@ -1,5 +1,9 @@
 package com.fire.action.manage;
 
+import com.fire.po.Police;
+import com.fire.po.PoliceStation;
+import com.fire.po.User;
+import com.fire.service.UserService;
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fire.po.PoliceInfo;
 import com.fire.service.PoliceManageService;
 
+import java.util.List;
+
 @Controller
 public class PoliceManageAction {
 	@Autowired
 	PoliceManageService policeManageService;
+	@Autowired
+	UserService userService;
 
 	// 客户端用户登录
 	@RequestMapping("/login")
@@ -47,5 +55,34 @@ public class PoliceManageAction {
 			return Result;
 		}
 
+	}
+
+	/**
+	 * 得到警员列表
+	 * @return
+	 */
+	public List<User> getPoliceList(){
+
+		return null;
+	}
+
+	/**
+	 * 得到派出所列表
+	 * @return
+	 */
+	@RequestMapping(value = "getPoliceStationList")
+	@ResponseBody
+	public List<PoliceStation> getPoliceStationList(){
+		return policeManageService.getPoliceStationList();
+	}
+
+	/**
+	 * 增加警员
+	 * @param user
+	 */
+	@RequestMapping("insertPolice")
+	@ResponseBody
+	public void insertPolice(User user){
+		userService.insertPolice(user);
 	}
 }

@@ -10,6 +10,7 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -38,13 +39,19 @@ public class APPInterfaceAction {
 	@RequestMapping(value = "getUnit")
 	@ResponseBody
 	public JSONObject getUnitByType(String policestation, int type){
-		if (type == 0) {
-			return checkService.findDailyCheck(policestation);
-		} else if (type == 1) {
-			return checkService.findRectifyCheck(policestation);
-		} else {
-			return checkService.findReportCheck(policestation);
+		JSONObject result;
+		switch (type){
+			case 1:
+				result = checkService.findRectifyCheck(policestation);
+				break;
+			case 2:
+				result = checkService.findReportCheck(policestation);
+				break;
+			default:
+				result = checkService.findDailyCheck(policestation);
+				break;
 		}
+		return result;
 	}
 
 	/**
@@ -197,7 +204,7 @@ public class APPInterfaceAction {
 	 */
 	@RequestMapping(value = "uploadAllData")
 	@ResponseBody
-	public void uploadCacheData(CacheData infoList){
+	public void uploadCacheData(@RequestBody CacheData infoList){
 		for (TableData tableData : infoList.getTableData()) {
 			tableData.getTableType();
 		}

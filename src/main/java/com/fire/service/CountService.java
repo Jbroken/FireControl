@@ -139,9 +139,13 @@ public class CountService {
 		return result;
 	}
 
-	public List<PersonalCondition> CheckPersonalCondition(String checker) {
+	public List<PersonalCondition> CheckPersonalCondition(String checker, int userid) {
 		// TODO Auto-generated method stub
-		return firetableMapper.CountPersonalCondition(checker);
+		if(checker != null && checker.length()>0){
+			return firetableMapper.CountPersonalByChecker(checker);
+		}
+
+		return firetableMapper.CountPersonalByUserid(userid);
 	}
 
 	public List<UnitInformation> checkFiretableByTime(Date date1, Date date2) {

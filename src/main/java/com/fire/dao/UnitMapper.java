@@ -74,7 +74,5 @@ public interface UnitMapper {
 	
 	int updateCheckstate(Firetable firetable);
 
-
-	
-	
+	void insertExcelData(List<Map<String, String>> data);
 }

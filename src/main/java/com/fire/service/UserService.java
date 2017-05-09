@@ -102,4 +102,7 @@ public class UserService {
 		return userMapper.getUserAndRoleById(userid);
 	}
 
+	public void insertPolice(User user) {
+		userMapper.insertUser(user);
+	}
 }

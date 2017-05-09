@@ -1,5 +1,6 @@
 package com.fire.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.fire.po.Firetable;
@@ -24,7 +25,7 @@ public class UnitService {
 		map.put("unitproperty", map.get("单位性质"));
 		map.put("area", map.get("建筑面积"));
 		map.put("floors", map.get("建筑层数"));
-		map.put("hight", map.get("建筑高度"));
+		map.put("height", map.get("建筑高度"));
 		map.remove("分局");
 		map.remove("派出所");
 		map.remove("单位名称");
@@ -53,4 +54,7 @@ public class UnitService {
 		return unitMapper.deleteByPrimaryKey(unitid);
 	}
 
+	public void insertExcelData(List<Map<String, String>> data) {
+		unitMapper.insertExcelData(data);
+	}
 }

@@ -119,10 +119,10 @@ public class CheckAction {
 	}
 
 	// 查询个人检查情况
-	@RequestMapping(value = "getPersonal")
+	@RequestMapping(value = "/getPersonal")
 	@ResponseBody
-	public List<PersonalCondition> countPersonal(String checker) {
-		return countService.CheckPersonalCondition(checker);
+	public List<PersonalCondition> countPersonal(String checker,int userid) {
+		return countService.CheckPersonalCondition(checker,userid);
 	}
 
 	// 根据场所得到表册列表

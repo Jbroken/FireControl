@@ -45,8 +45,9 @@ public interface FiretableMapper {
 
 
     //得到检查者每个月的检查情况
-    @Select("select DATE_FORMAT(checkdate,'%Y%m')AS time,count(DATE_FORMAT(checkdate,'%Y%m')) AS count,checker,userid from firetable where checker = #{value} OR userid = #{value} group by time")
-	List<PersonalCondition> CountPersonalCondition(String checker);
+	List<PersonalCondition> CountPersonalByChecker(String checker);
+
+	List<PersonalCondition> CountPersonalByUserid(int userid);
 
     //根据派出所ID查询商铺信息
     @Select("select branch.branchid,branch.branchname,policestation.policeid,policestation.policeStation AS policename,unit.unitid,unit.unitname,unit.address,unit.master,firetable.firetableid,firetable.checker,firetable.checkdate from branch,policestation,unit,firetable where branch.branchid = policestation.branchid and policestation.policeid = unit.policeid and unit.unitid = firetable.unitid and policestation.policeid = #{value}")
@@ -107,7 +108,5 @@ public interface FiretableMapper {
 	@Select("select policestation.policestation,count(*) as tablesum,DATE_FORMAT(firetable.checkdate,'%Y-%m') as time from policestation,unit,firetable where policestation.policeid = #{policeid.policeid} and firetable.checkdate between DATE_SUB(#{enddate},INTERVAL ${number} month) and #{enddate} and unit.unitid = firetable.unitid group by DATE_FORMAT(firetable.checkdate,'%Y%m')")
 	List<PoliceStInfo> getPoliceStInfoByMouth(@Param(value="enddate")Date enddate,@Param(value="number")String number,
 			@Param(value="policeid")Policestationid policeid);
-    
-    
-    
+
 }
