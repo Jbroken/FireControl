@@ -1,12 +1,9 @@
 package com.fire.dao;
 
-import com.fire.po.Police;
-import com.fire.po.PoliceExample;
-import com.fire.po.PoliceInfo;
+import com.fire.po.*;
 
 import java.util.List;
 
-import com.fire.po.PoliceStation;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -36,6 +33,9 @@ public interface PoliceMapper {
 
 	@Select("select user.userid,user.tel,user.password,user.idcard,policestation.policeStation,count(*) as unitCount,sum(unit.checkstate=1) as noCheckCount from user,policestation,unit where tel = #{value} and user.policeid = unit.policeid and user.policeid = policestation.policeid")
     PoliceInfo selectPoliceByName(String tel);
-    @Select("select policeid,policeStation from policestation")
+
+	@Select("select policeid,policeStation from policestation")
     List<PoliceStation> getPoliceStationList();
+
+
 }

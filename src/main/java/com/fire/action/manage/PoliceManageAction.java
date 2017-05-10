@@ -1,6 +1,5 @@
 package com.fire.action.manage;
 
-import com.fire.po.Police;
 import com.fire.po.PoliceStation;
 import com.fire.po.User;
 import com.fire.service.UserService;
@@ -57,13 +56,19 @@ public class PoliceManageAction {
 
 	}
 
+	@RequestMapping(value = "polices")
+	public String  getPolicesPage(){
+		return "manage/polices";
+	}
+
 	/**
 	 * 得到警员列表
 	 * @return
 	 */
+	@RequestMapping(value = "getPoliceList")
+	@ResponseBody
 	public List<User> getPoliceList(){
-
-		return null;
+		return policeManageService.getPoliceList();
 	}
 
 	/**

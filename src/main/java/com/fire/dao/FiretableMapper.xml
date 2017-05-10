@@ -393,8 +393,8 @@
   </select>
 
   <select id="getTableById" parameterType="java.lang.String" resultType="com.fire.po.FiretableInformation">
-    SELECT b.unitid,b.unitname,b.unitproperty,b.master,b.height,b.floors,b.address,b.area,a.checkdate,a.otherchecker,a.checker,a.remarks,a.problem
-      FROM (SELECT unitid,checkdate,checker,otherchecker,remarks,problem FROM firetable WHERE firetableid=#{firetableid}) AS a
+    SELECT b.unitid,b.unitname,b.unitproperty,b.master,b.height,b.floors,b.address,b.area,a.firetableid,a.checkdate,a.otherchecker,a.checker,a.remarks,a.problem
+      FROM (SELECT firetableid,unitid,checkdate,checker,otherchecker,remarks,problem FROM firetable WHERE firetableid=#{firetableid}) AS a
         LEFT JOIN unit AS b ON a.unitid = b.unitid
   </select>
 

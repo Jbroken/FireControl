@@ -360,10 +360,12 @@
       relname = #{relname,jdbcType=VARCHAR},
       userlimit = #{userlimit,jdbcType=VARCHAR},
       lastlogin = #{lastlogin,jdbcType=TIMESTAMP}
-    where userid = #insertUser{userid,jdbcType=INTEGER}
+    where userid = #{userid,jdbcType=INTEGER}
   </update>
+  <select id="getPoliceList" resultType="com.fire.po.User">
+    SELECT b.*,a.policeStation AS policestation FROM user AS b
+      LEFT JOIN policestation AS a ON a.policeid = b.policeid
+        WHERE userlimit is NULL ORDER BY policeid
+  </select>
 
-  <insert id="insertUser" parameterType="com.fire.po.User">
-
-  </insert>
 </mapper>

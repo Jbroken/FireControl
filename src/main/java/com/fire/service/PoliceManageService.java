@@ -1,6 +1,8 @@
 package com.fire.service;
 
+import com.fire.dao.UserMapper;
 import com.fire.po.PoliceStation;
+import com.fire.po.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ public class PoliceManageService {
 
 	@Autowired
 	PoliceMapper policeMapper;
+	@Autowired
+	UserMapper userMapper;
 
 	public PoliceInfo findPoliceByName(String tel) {
 
@@ -43,5 +47,9 @@ public class PoliceManageService {
 
     public List<PoliceStation> getPoliceStationList() {
         return policeMapper.getPoliceStationList();
+    }
+
+    public List<User> getPoliceList() {
+        return userMapper.getPoliceList();
     }
 }

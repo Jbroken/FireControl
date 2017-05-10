@@ -28,6 +28,7 @@ public class User {
    
     private Role role;
     private Page page;
+    private String policestation;
     public Integer getUserid() {
         return userid;
     }
@@ -112,6 +113,7 @@ public class User {
 	public Date getLastlogin() {
         return lastlogin;
     }
+
     public void setLastlogin(Date lastlogin) {
         this.lastlogin = lastlogin;
     }
@@ -132,5 +134,11 @@ public class User {
 		this.page = page;
 	}
 
-    
+    public String getPolicestation() {
+        return policestation;
+    }
+
+    public void setPolicestation(String policestation) {
+        this.policestation = policestation;
+    }
 }

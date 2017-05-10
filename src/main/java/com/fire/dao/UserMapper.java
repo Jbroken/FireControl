@@ -115,4 +115,6 @@ public interface UserMapper {
    	User getUserInfo(@Param("username")String username, @Param("password")String password);
 
     void insertUser(User user);
+
+    List<User> getPoliceList();
 }

@@ -209,5 +209,8 @@ public class APPInterfaceAction {
 			tableData.getTableType();
 		}
 	}
+	public void uploadCacheData(List<TableData> infoList){
+
+	}
 
 }
