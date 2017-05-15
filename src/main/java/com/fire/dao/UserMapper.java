@@ -114,7 +114,5 @@ public interface UserMapper {
    	@Select("select * from user where username = #{username} or tel = #{username} and password = #{password}")
    	User getUserInfo(@Param("username")String username, @Param("password")String password);
 
-    void insertUser(User user);
-
     List<User> getPoliceList();
 }

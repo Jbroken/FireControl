@@ -367,5 +367,4 @@
       LEFT JOIN policestation AS a ON a.policeid = b.policeid
         WHERE userlimit is NULL ORDER BY policeid
   </select>
-
 </mapper>

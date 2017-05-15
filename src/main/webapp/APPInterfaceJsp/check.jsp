@@ -21,6 +21,9 @@
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/tablehead.css" />
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/mui.min.css" >
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+	<script type="text/javascript">
+		console.log(table);
+	</script>
 </head>
 
 <body>
@@ -29,7 +32,7 @@
 				<div class="header">
 					<%--<div class="header_policestation"></div>--%>
 					<div class="header_title">公安派出所日常消防监督检查记录</div>
-					<div class="header_number">编号：[${table.unitid}]第${tab.firetableid}号</div>
+					<div class="header_number">编号：[${table.unitid}]第${table.firetableid}号</div>
 				</div>
 				<div class="check table">
 					<ul class="mui-table-view">
@@ -105,32 +108,34 @@
 					    		<p class='mui-ellipsis'>${table.remarks}</p>
 					   		</div>
 					    </li>
-						<c:choose>
-							<c:when test="${table.picture[0].PicType == 'CheckerPic'}">
-								<li class="mui-table-view-cell mui-media">
-					    			<div class="mui-media-body">
-					    				身份信息
-					    		 		<img class="mui-media-object" src="${table.picture[0].pictureurl}">
-					   				</div>
-					    		</li>
-							</c:when>
-							<c:when test="${table.picture[0].PicType == 'UnitPic'}">
-								<li class="mui-table-view-cell mui-media">
-					    			<div class="mui-media-body">
-					    				场所信息
-					    		 		<img class="mui-media-object" src="${table.picture[0].pictureurl}">
-					   				</div>
-					    		</li>
-							</c:when>
-							<c:when test="${table.picture[0].PicType == 'SignPic'}">
-								<li class="mui-table-view-cell mui-media">
-					    			<div class="mui-media-body">
-					    				签名
-					    		 		<img class="mui-media-object" src="${table.picture[0].pictureurl}">
-					   				</div>
-					    		</li>
-							</c:when>
-						</c:choose>
+						<c:forEach var="picture" items="${table.picture}">
+							<c:choose>
+								<c:when test="${picture.PicType == 'CheckerPic'}">
+									<li class="mui-table-view-cell mui-media">
+										<div class="mui-media-body">
+											身份信息
+											<img class="mui-media-object" src="${picture.pictureurl}">
+										</div>
+									</li>
+								</c:when>
+								<c:when test="${picture.PicType == 'UnitPic'}">
+									<li class="mui-table-view-cell mui-media">
+										<div class="mui-media-body">
+											场所信息
+											<img class="mui-media-object" src="${picture.pictureurl}">
+										</div>
+									</li>
+								</c:when>
+								<c:when test="${picture.PicType == 'SignPic'}">
+									<li class="mui-table-view-cell mui-media">
+										<div class="mui-media-body">
+											签名
+											<img class="mui-media-object" src="${picture.pictureurl}">
+										</div>
+									</li>
+								</c:when>
+							</c:choose>
+						</c:forEach>
 					</ul>
 				</div>
 		</form>

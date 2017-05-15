@@ -90,14 +90,13 @@ public class APPInterfaceAction {
 	}
 
 	/**
-	 * 根据检查日期得到具体表册
+	 * 根据表册id得到具体表册数据
 	 * @param model
-	 * @param checkdate
 	 * @param firetableid
 	 * @return
 	 */
 	@RequestMapping(value = "getTableInformation")
-	public String getTableInformation(Model model, String checkdate,String firetableid) {
+	public String getTableInformation(Model model, String firetableid) {
 		model.addAttribute("table", checkService.findtableById(firetableid));
 		return "APPInterfaceJsp/check";
 	}
@@ -208,9 +207,6 @@ public class APPInterfaceAction {
 		for (TableData tableData : infoList.getTableData()) {
 			tableData.getTableType();
 		}
-	}
-	public void uploadCacheData(List<TableData> infoList){
-
 	}
 
 }

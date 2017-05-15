@@ -45,6 +45,56 @@ var loadPolice = function (police) {
     })
     $table.append(row.join(' '));
 }
+
+var addPolice = function(){
+    getPoliceStation();
+    $('#addPolice').modal('show');
+}
+
+/**
+ * 获取派出所列表
+ */
+function getPoliceStation() {
+    $.ajax({
+        url:'getPoliceStationList',
+        type:'post',
+        dataType:'json',
+        success:function (rdata) {
+            console.info(rdata);
+            bindPoliceStation(rdata);
+        },
+        error:function () {
+        }
+    })
+}
+function bindPoliceStation(dataList) {
+    var $policestation = $("#policestation");
+	$policestation.empty();
+	var dataItems=new Array();
+	$.each(dataList,function(index,item){
+		dataItems.push('<option value="'+item.policeid+'" class="text-left">'+item.policeStation+'</option>')
+	});
+	$policestation.append(dataItems.join(''));
+	$policestation.selectpicker('render');
+	$policestation.selectpicker('refresh');
+}
+function insertPolice() {
+    var data = new Object();
+    $("input:text").each(function() {
+        data[this.name] = this.value;
+    });
+    data["policeid"] = $("#policestation").selectpicker('val');
+    console.log(data)
+    $.ajax({
+        url:'insertPolice',
+        type:'post',
+        dataType:'json',
+        data:data,
+        success:function () {
+             $('#addPolice').modal('hidden');
+        }
+    })
+}
 $(document).ready(function () {
     getPoliceList();
 })

@@ -103,6 +103,6 @@ public class UserService {
 	}
 
 	public void insertPolice(User user) {
-		userMapper.insertUser(user);
+		userMapper.insert(user);
 	}
 }
