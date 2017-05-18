@@ -29,13 +29,14 @@
     <div class="page-bar">
 			<ul class="page-breadcrumb">
 				<li><span class="glyphicon glyphicon-home"></span>系统管理<span
-					class="fa fa-angle-right"></span></li>
-				<li>警员管理<span class="fa fa-angle-right"></span></li>
-				<li>主页</li>
+					class="glyphicon glyphicon-menu-right"></span></li>
+				<li>警员管理</li>
 			</ul>
 			<div class="tool-icon-bar">
-				<a title="添加" onclick="addPolice()" class="icon" href="javascript:void(0)"
-				><span class="glyphicon glyphicon-plus-sign"></span></a>
+				<a title="添加" onclick="addPolice()" class="icon" href="javascript:void(0)">
+                    <span class="glyphicon glyphicon-plus-sign"></span></a>
+                <a title="删除" onclick="" class="icon" href="javascript:void(0)">
+                    <span class="glyphicon glyphicon-trash"></span></a>
 
 			</div>
 		</div>
