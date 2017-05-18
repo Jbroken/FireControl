@@ -44,13 +44,6 @@
         <thead></thead>
         <tbody></tbody>
     </table>
-    <%--<nav aria-label="...">--%>
-          <%--<ul class="pagination">--%>
-            <%--<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>--%>
-            <%--<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>--%>
-            <%--...--%>
-          <%--</ul>--%>
-    <%--</nav>--%>
 </div>
 <!-- Modal -->
 <div class="modal fade bs-example-modal-sm" id="addPolice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

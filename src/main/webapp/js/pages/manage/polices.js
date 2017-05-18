@@ -46,7 +46,7 @@ var loadPolice = function (police) {
     $table.append(row.join(' '));
 }
 
-var addPolice = function(){
+ function addPolice(){
     getPoliceStation();
     $('#addPolice').modal('show');
 }
@@ -91,7 +91,7 @@ function insertPolice() {
         dataType:'json',
         data:data,
         success:function () {
-             $('#addPolice').modal('hidden');
+             $('#addPolice').modal('hide');
         }
     })
 }

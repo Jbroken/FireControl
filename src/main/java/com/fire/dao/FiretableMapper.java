@@ -86,7 +86,7 @@ public interface FiretableMapper {
 	List<CheckData> getCheckdateById(Integer unitid);
 
     //根据表册id获取表册数据
-	List<FiretableInformation> getTableById(String firetableid);
+	FiretableInformation getTableById(String firetableid);
 
 	//根据场所名称查询表册
 	@Select("select unit.unitname,unit.unitid,unit.master,unit.address,firetable.firetableid,firetable.checker,firetable.checkdate from unit,firetable where unit.unitid = firetable.unitid and unit.unitname = #{unitname}")

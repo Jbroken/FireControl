@@ -135,7 +135,7 @@ public class CheckAction {
 	// 根据场所检查日期和场所ID得到具体的场所信息
 	@RequestMapping(value = "getTableInfo")
 	@ResponseBody
-	public List<FiretableInformation> getTableInfo(String checkdate, String firetableid) {
+	public FiretableInformation getTableInfo(String checkdate, String firetableid) {
 		return checkService.findtableById(firetableid);
 	}
 	/**

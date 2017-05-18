@@ -47,14 +47,12 @@ public interface UnitMapper {
   	@Select("select unit.unitproperty as Category,DATE_FORMAT(firetable.checkdate,'%Y%m')AS week,count(firetable.checkdate)AS count from unit,firetable WHERE unit.unitid = firetable.unitid AND firetable.checkdate between #{date1} and #{date2} group by week,Category")
   	List<SingleUnit> getunitbydate(@Param("date1")Date date1,@Param("date2")Date date2);
 
-  	//根据派出所得到商铺信息
+  	//根据派出所得到场所类型
     @Select("select unit.unitproperty as type from unit,policestation where  unit.policeid = policestation.policeid and policestation.policeStation = #{policestation} group by unitproperty")
 	List<UnitChildren> getType(String policestation);
 
 	List<UnitMasterInfo> getUnitInformation(int unitid);
 
-    //根据派出所得到商铺信息
-    @Select("select unit.unitid as id,unit.rectifyid,unit.reportid,unit.unitname as title,unit.checkstate as state,policestation.policeid,unit.master,unit.address,unit.checkType as checktype,unit.report,task.SetTime,task.Tasktime from policestation,unit,task where unit.policeid = policestation.policeid and policestation.policeStation = #{policestation} and unit.unitid = task.unitid AND unit.unitproperty= #{type}")
 	List<UnitType> getUnit(@Param(value="policestation")String policestation, @Param(value="type")String type);
 
 	//获得需整改检查的商铺

@@ -22,7 +22,7 @@
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/mui.min.css" >
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 	<script type="text/javascript">
-		console.log(table);
+		console.log(${table.picture});
 	</script>
 </head>
 
@@ -108,9 +108,9 @@
 					    		<p class='mui-ellipsis'>${table.remarks}</p>
 					   		</div>
 					    </li>
-						<c:forEach var="picture" items="${table.picture}">
+						<c:forEach items="${table.picture}" var="picture">
 							<c:choose>
-								<c:when test="${picture.PicType == 'CheckerPic'}">
+								<c:when test="${picture.picType == 'CheckerPic'}">
 									<li class="mui-table-view-cell mui-media">
 										<div class="mui-media-body">
 											身份信息
@@ -118,7 +118,7 @@
 										</div>
 									</li>
 								</c:when>
-								<c:when test="${picture.PicType == 'UnitPic'}">
+								<c:when test="${picture.picType == 'UnitPic'}">
 									<li class="mui-table-view-cell mui-media">
 										<div class="mui-media-body">
 											场所信息
@@ -126,7 +126,7 @@
 										</div>
 									</li>
 								</c:when>
-								<c:when test="${picture.PicType == 'SignPic'}">
+								<c:when test="${picture.picType == 'SignPic'}">
 									<li class="mui-table-view-cell mui-media">
 										<div class="mui-media-body">
 											签名

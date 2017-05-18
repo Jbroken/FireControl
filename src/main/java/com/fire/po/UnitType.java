@@ -6,16 +6,20 @@ public class UnitType {
 	
 	private Integer policeid;
 	
-	private Integer rectifyid;
-	
-	private Integer reportid;
-	
 	private String title;
 	
-	private String state;
+	private Integer state;
 	
 	private String master;
-	
+
+	private String type;
+
+	private String area;
+
+	private Integer floors;
+
+	private Integer height;
+
 	private String address;
 	
 	private Integer checkType;
@@ -44,23 +48,6 @@ public class UnitType {
 		this.policeid = policeid;
 	}
 
-	
-	public Integer getRectifyid() {
-		return rectifyid;
-	}
-
-	public void setRectifyid(Integer rectifyid) {
-		this.rectifyid = rectifyid;
-	}
-
-	public Integer getReportid() {
-		return reportid;
-	}
-
-	public void setReportid(Integer reportid) {
-		this.reportid = reportid;
-	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -69,11 +56,11 @@ public class UnitType {
 		this.title = title;
 	}
 
-	public String getState() {
+	public Integer getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(Integer state) {
 		this.state = state;
 	}
 
@@ -133,6 +120,35 @@ public class UnitType {
 		this.day = day;
 	}
 
-	
-	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public Integer getFloors() {
+		return floors;
+	}
+
+	public void setFloors(Integer floors) {
+		this.floors = floors;
+	}
+
+	public Integer getHeight() {
+		return height;
+	}
+
+	public void setHeight(Integer height) {
+		this.height = height;
+	}
 }

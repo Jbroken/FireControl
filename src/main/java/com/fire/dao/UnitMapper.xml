@@ -456,4 +456,14 @@
   		where unitid = #{unitid,jdbcType=INTEGER}
   
   </update>
+
+  <select id="getUnit" resultType="com.fire.po.UnitType">
+    SELECT a.*,c.Tasktime AS day,c.SetTime FROM (SELECT unitname as title,unitid as id,master,address,area,unitproperty AS type,floors,height,checkstate as state,checktype,report FROM unit  WHERE unitproperty = #{type})AS a
+      LEFT JOIN (SELECT * FROM policestation WHERE policeStation = #{policestation}) AS b ON a.id = b.policeid
+        LEFT JOIN task AS c ON a.id = c.unitid
+  </select>
+
+  <!--<select id="getRectifyCheckInfo"  resultType="com.fire.po.UnitType">-->
+
+  <!--</select>-->
 </mapper>

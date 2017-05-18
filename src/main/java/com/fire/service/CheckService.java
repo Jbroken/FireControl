@@ -126,12 +126,15 @@ public class CheckService {
 			for (int j = 0; j < unitInformation.size(); j++) {
 
 				String nowDate = DateUtil.getNowDate();
-
-				String endDate = DateUtil.getSpecifiedDayAfter(unitInformation
-						.get(j).getSetTime(), unitInformation.get(j)
-						.getTasktime());// 最后期限
+				String endDate = null;
+				long day=0;
+				if(unitInformation.get(j).getSetTime() != null && unitInformation.get(j).getTasktime()!=null){
+					endDate = DateUtil.getSpecifiedDayAfter(unitInformation
+							.get(j).getSetTime(), unitInformation.get(j)
+							.getTasktime());// 最后期限
+				}
 				// 如果超期就为负数
-				long day = DateUtil.minusDate(endDate, nowDate);
+				day = DateUtil.minusDate(endDate, nowDate);
 				unitInformation.get(j).setDay(day);
 			}
 			// 判断商铺是否存在
@@ -160,18 +163,13 @@ public class CheckService {
 		return firetableMapper.getCheckdateById(unitid);
 	}
 
-	public List<FiretableInformation> findtableById(String firetableid) {
-			List<FiretableInformation> tableInfo = firetableMapper.getTableById(firetableid);
-			try {
-				List<Picture> picture = pictureMapper.findPictureById(firetableid);
-				if(picture != null){
-					tableInfo.get(0).setPicture(picture);
-				}
-				return tableInfo;
-			} catch (Exception e) {
-				// TODO: handle exception
-				return tableInfo;
+	public FiretableInformation findtableById(String firetableid) {
+			FiretableInformation tableInfo = firetableMapper.getTableById(firetableid);
+			List<Picture> picture = pictureMapper.findPictureById(firetableid);
+			if(picture != null){
+				tableInfo.setPicture(picture);
 			}
+			return tableInfo;
 		}
 	
 	public int UploadCheckRecord(Firetable firetable) {

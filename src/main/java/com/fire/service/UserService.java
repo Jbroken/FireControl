@@ -86,9 +86,6 @@ public class UserService {
 
 	public User getUserByNameAndPwd(String username, String password) {
 		// TODO Auto-generated method stub
-		// User user = new User();
-		// user.setUsername(username);
-		// user.setPassword(password);
 		return userMapper.getUserInfo(username, password);
 	}
 

@@ -78,9 +78,10 @@ public class DateUtil {
 	 * @return 返回天数 day=a-b
 	 */
 	public static long minusDate(String a, String b){
-		
-		long day = (StringToDate.singleDate(a).getTime()-StringToDate.singleDate(b).getTime())/(24*60*60*1000);
-		
+		long day  =0;
+		if (a != null){
+			day= (StringToDate.singleDate(a).getTime()-StringToDate.singleDate(b).getTime())/(24*60*60*1000);
+		}
 		return day;
 	}
 	/**
