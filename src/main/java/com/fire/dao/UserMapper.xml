@@ -367,4 +367,9 @@
       LEFT JOIN policestation AS a ON a.policeid = b.policeid
         WHERE userlimit is NULL ORDER BY policeid
   </select>
+
+  <insert id="insertPolice" parameterType="com.fire.po.Police">
+    INSERT INTO user(userid,policeid,relname,tel,password)
+      VALUES (#{userid},#{policeid},#{relname},#{tel},#{password})
+  </insert>
 </mapper>

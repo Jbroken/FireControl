@@ -20,7 +20,7 @@
 <link rel="stylesheet" type="text/css" href="css/tablehead.css" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <script type="text/javascript">
-	function getUnit(policestation, unitid, title, address, master, userid) {
+	function getUnit(policestation,property, unitid, title, address, master, userid) {
 		$("#header_policestation").innerHTML = (policestation);
 		$("#unitid").val(unitid);
 		$("#userid").val(userid);

@@ -23,8 +23,9 @@
 <script type="text/javascript" src="js/localStorage.js"></script>
 
 <script type="text/javascript">
-	function getUnit(policestation, unitid, title, address, master, userid) {
+	function getUnit(policestation, property, unitid, title, address, master, userid) {
 		$("#header_policestation").innerHTML = (policestation);
+		$("#property").val(property);
 		$("#unitid").val(unitid);
 		$("#unitname").val(title);
 		$("#address").val(address);
@@ -72,7 +73,7 @@
 					class="input_header"></span>
 				<hr />
 
-				<span>单位性质<input type="text" name="unitproperty"
+				<span>单位性质<input type="text" name="unitproperty" id="property"
 					class="input_header"></span>
 				<hr />
 				<span>使用的建筑面积<input type="text" name="area"

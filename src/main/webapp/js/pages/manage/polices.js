@@ -68,30 +68,32 @@ function getPoliceStation() {
     })
 }
 function bindPoliceStation(dataList) {
-    var $policestation = $("#policestation");
-	$policestation.empty();
+    var $policeid = $("#policeid");
+    $policeid.empty();
 	var dataItems=new Array();
 	$.each(dataList,function(index,item){
 		dataItems.push('<option value="'+item.policeid+'" class="text-left">'+item.policeStation+'</option>')
 	});
-	$policestation.append(dataItems.join(''));
-	$policestation.selectpicker('render');
-	$policestation.selectpicker('refresh');
+    $policeid.append(dataItems.join(''));
+    $policeid.selectpicker('render');
+    $policeid.selectpicker('refresh');
 }
 function insertPolice() {
     var data = new Object();
     $("input:text").each(function() {
         data[this.name] = this.value;
     });
-    data["policeid"] = $("#policestation").selectpicker('val');
-    console.log(data)
+    data["policeid"] = $("#policeid").selectpicker('val');
+    var from = new FormData($('#polices')[0]);
+    console.log(from);
     $.ajax({
         url:'insertPolice',
         type:'post',
         dataType:'json',
         data:data,
         success:function () {
-             $('#addPolice').modal('hide');
+            getPoliceList();
+            $('#addPolice').modal('hide');
         }
     })
 }

@@ -1,5 +1,6 @@
 package com.fire.action.manage;
 
+import com.fire.po.Police;
 import com.fire.po.PoliceStation;
 import com.fire.po.User;
 import com.fire.service.UserService;
@@ -83,11 +84,23 @@ public class PoliceManageAction {
 
 	/**
 	 * 增加警员
-	 * @param user
+	 * @param police
 	 */
 	@RequestMapping("insertPolice")
 	@ResponseBody
-	public void insertPolice(User user){
-		userService.insertPolice(user);
+	public void insertPolice(Police police){
+		User user = userService.getUserById(police.getUserid());
+		if (user != null){
+			userService.insertPolice(police);
+		}
+	}
+
+	/**
+	 * 删除警员
+	 * @param puliceid
+	 */
+	@RequestMapping(value = "deletePolice")
+	public void deletePolice(int puliceid){
+		userService.daleteUser(puliceid);
 	}
 }

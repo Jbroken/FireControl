@@ -2,29 +2,14 @@ package com.fire.service;
 
 import java.util.List;
 
+import com.fire.dao.*;
+import com.fire.po.*;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fire.dao.CheckrecordMapper;
-import com.fire.dao.FiretableMapper;
-import com.fire.dao.PictureMapper;
-import com.fire.dao.TaskMapper;
-import com.fire.dao.UnitMapper;
-import com.fire.po.CheckData;
-import com.fire.po.Checkrecord;
-import com.fire.po.Firetable;
-import com.fire.po.FiretableInformation;
-import com.fire.po.Picture;
-import com.fire.po.Task;
-import com.fire.po.TreeModel;
-import com.fire.po.UnitChildren;
-import com.fire.po.UnitInformation;
-import com.fire.po.UnitMasterInfo;
-import com.fire.po.UnitType;
-import com.fire.po.Unitname;
 import com.fire.utils.DateUtil;
 
 @Service
@@ -38,6 +23,8 @@ public class CheckService {
 	TaskMapper taskMapper;
 	@Autowired
 	CheckrecordMapper checkrecordMapper;
+	@Autowired
+	TroubletableMapper troubletableMapper;
 	@Autowired
 	PictureMapper pictureMapper;
 
@@ -152,6 +139,64 @@ public class CheckService {
 		return jObject;
 	}
 
+	/***
+	 * 整改检查
+	 *
+	 * @param policestation
+	 * @return
+	 */
+	public JSONObject findRectifyCheck(String policestation) {
+		// TODO Auto-generated method stub
+		// 由派出所得到该派出所下的所有商铺类型
+		List<UnitChildren> unitType = unitMapper.getType(policestation);
+		JSONObject jsonObject = new JSONObject();
+		JSONObject jObject = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+		for (int i = 0; i < unitType.size(); i++) {
+			List<UnitType> unitInformation = unitMapper.getRectifyCheckInfo(
+					policestation, unitType.get(i).getType());
+			// 判断商铺是否存在
+			if (unitInformation.size() > 0) {
+				// 得到商铺类型
+				jsonObject.put("type", unitType.get(i).getType());
+				// 得到该商铺类型下所有商铺
+				jsonObject.put("children", unitInformation);
+
+				jsonArray.add(jsonObject);
+			}
+		}
+		jObject.put("result", jsonArray);
+		return jObject;
+	}
+
+	/***
+	 * 举报检查
+	 *
+	 * @param policestation
+	 * @return
+	 */
+	public JSONObject findReportCheck(String policestation) {
+		// TODO Auto-generated method stub
+		// 由派出所得到该派出所下的所有商铺类型
+		List<UnitChildren> unitType = unitMapper.getType(policestation);
+		JSONObject jsonObject = new JSONObject();
+		JSONObject jObject = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+		for (int i = 0; i < unitType.size(); i++) {
+			List<UnitType> unitInformation = unitMapper.getReportCheck(
+					policestation, unitType.get(i).getType());
+			if (unitInformation.size() > 0) {
+				// 得到商铺类型
+				jsonObject.put("type", unitType.get(i).getType());
+				// 得到改商铺类型下所有商铺
+				jsonObject.put("children", unitInformation);
+
+				jsonArray.add(jsonObject);
+			}
+		}
+		jObject.put("result", jsonArray);
+		return jObject;
+	}
 	public List<UnitMasterInfo> getUnitInformation(int unitid) {
 		// TODO Auto-generated method stub
 		return unitMapper.getUnitInformation(unitid);
@@ -182,65 +227,6 @@ public class CheckService {
 		return checkrecordMapper.insert(checkrecord);
 	}
 
-	/***
-	 * 整改检查
-	 * 
-	 * @param policestation
-	 * @return
-	 */
-	public JSONObject findRectifyCheck(String policestation) {
-		// TODO Auto-generated method stub
-		// 由派出所得到该派出所下的所有商铺类型
-		List<UnitChildren> unitType = unitMapper.getType(policestation);
-		JSONObject jsonObject = new JSONObject();
-		JSONObject jObject = new JSONObject();
-		JSONArray jsonArray = new JSONArray();
-		for (int i = 0; i < unitType.size(); i++) {
-			List<UnitType> unitInformation = unitMapper.getRectifyCheckInfo(
-                    policestation, unitType.get(i).getType());
-			// 判断商铺是否存在
-			if (unitInformation.size() > 0) {
-				// 得到商铺类型
-				jsonObject.put("type", unitType.get(i).getType());
-				// 得到该商铺类型下所有商铺
-				jsonObject.put("children", unitInformation);
-
-				jsonArray.add(jsonObject);
-			}
-		}
-		jObject.put("result", jsonArray);
-		return jObject;
-	}
-
-	/***
-	 * 举报检查
-	 * 
-	 * @param policestation
-     * @return
-	 */
-	public JSONObject findReportCheck(String policestation) {
-		// TODO Auto-generated method stub
-		// 由派出所得到该派出所下的所有商铺类型
-		List<UnitChildren> unitType = unitMapper.getType(policestation);
-		JSONObject jsonObject = new JSONObject();
-		JSONObject jObject = new JSONObject();
-		JSONArray jsonArray = new JSONArray();
-		for (int i = 0; i < unitType.size(); i++) {
-			List<UnitType> unitInformation = unitMapper.getReportCheck(
-                    policestation, unitType.get(i).getType());
-			if (unitInformation.size() > 0) {
-				// 得到商铺类型
-				jsonObject.put("type", unitType.get(i).getType());
-				// 得到改商铺类型下所有商铺
-				jsonObject.put("children", unitInformation);
-
-				jsonArray.add(jsonObject);
-			}
-		}
-		jObject.put("result", jsonArray);
-		return jObject;
-	}
-
 	public List<Task> selectTaskTime(Integer unitid) {
 		// TODO Auto-generated method stub
 		return taskMapper.selectTaskTime(unitid);
@@ -261,4 +247,15 @@ public class CheckService {
 		return firetableMapper.getTableByunit(unitname);
 	}
 
+    public Troubletable getTroubleInfo(String troubletableid) {
+		return troubletableMapper.selectByPrimaryKey(troubletableid);
+    }
+
+	public void getUnitByType(String policestation, int type) {
+		List<UnitChildren> unitType = unitMapper.getType(policestation);
+		switch (type){
+			case 0:
+
+		}
+	}
 }

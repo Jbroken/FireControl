@@ -21,9 +21,6 @@
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/tablehead.css" />
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/mui.min.css" >
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
-	<script type="text/javascript">
-		console.log(${table.picture});
-	</script>
 </head>
 
 <body>
@@ -114,7 +111,7 @@
 									<li class="mui-table-view-cell mui-media">
 										<div class="mui-media-body">
 											身份信息
-											<img class="mui-media-object" src="${picture.pictureurl}">
+											<img class="img-responsive" src="${picture.pictureurl}">
 										</div>
 									</li>
 								</c:when>
@@ -122,7 +119,7 @@
 									<li class="mui-table-view-cell mui-media">
 										<div class="mui-media-body">
 											场所信息
-											<img class="mui-media-object" src="${picture.pictureurl}">
+											<img class="img-responsive" src="${picture.pictureurl}">
 										</div>
 									</li>
 								</c:when>
@@ -130,7 +127,7 @@
 									<li class="mui-table-view-cell mui-media">
 										<div class="mui-media-body">
 											签名
-											<img class="mui-media-object" src="${picture.pictureurl}">
+											<img class="img-responsive" src="${picture.pictureurl}">
 										</div>
 									</li>
 								</c:when>

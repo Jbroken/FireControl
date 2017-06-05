@@ -8,7 +8,7 @@ public class PolicestationList {
 	
 	private String datatype;
 	
-	private String datetype;
+	private Integer datetype;
 	
 	private String enddate;
 	
@@ -30,11 +30,11 @@ public class PolicestationList {
 		this.datatype = datatype;
 	}
 
-	public String getDatetype() {
+	public Integer getDatetype() {
 		return datetype;
 	}
 
-	public void setDatetype(String datetype) {
+	public void setDatetype(Integer datetype) {
 		this.datetype = datetype;
 	}
 

@@ -44,8 +44,7 @@ public class CountService {
 
 	public JSONObject getSingleUnitCheckTimesByCategory(Date date1, Date date2) {
 
-		List<SingleUnit> singleUnit = unitMapper
-				.getSingleUnitCheckTimesByCategory(date1, date2);
+		List<SingleUnit> singleUnit = unitMapper.getSingleUnitCheckTimesByCategory(date1, date2);
 		// 无重复的数组
 		Set<String> name = new HashSet<String>();
 		SortedSet<String> time = new TreeSet<String>();
@@ -173,7 +172,8 @@ public class CountService {
 	 * @return
 	 */
 	public List getPoliceStInfo(PolicestationList policestationList, Policestationid policeid) {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
+		List<PoliceStInfo> policeCheckInfos;
 		List<PoliceCheckInfo> unitsum= firetableMapper.getUnitSum(policeid);
 		if(policestationList.getDatetype().equals("1")){
 			//根据结束日期和天数，得到日期列表
@@ -193,7 +193,7 @@ public class CountService {
 		}
 		//按周查询派出所检查情况
 		if (policestationList.getDatetype().equals("2")) {
-			List<PoliceStInfo> policeCheckInfos = firetableMapper.getPoliceStInfoByWeek(StringToDate.singleDate(policestationList.getEnddate()),policestationList.getNumber(),policeid);
+			policeCheckInfos = firetableMapper.getPoliceStInfoByWeek(StringToDate.singleDate(policestationList.getEnddate()),policestationList.getNumber(),policeid);
 			for (int i = 0; i < policeCheckInfos.size(); i++) {
 				String coverage = DivisionUtil.ReturnDecimals(Integer.valueOf(policeCheckInfos.get(i).getTablesum()),unitsum.get(0).getUnitsum());//得出覆盖率 =表册数/场所总数
 				policeCheckInfos.get(i).setCoverage(coverage);
@@ -202,7 +202,7 @@ public class CountService {
 			return policeCheckInfos;
 		}
 		//按月查询派出所检查情况
-		List<PoliceStInfo> policeCheckInfos = firetableMapper.getPoliceStInfoByMouth(StringToDate.singleDate(policestationList.getEnddate()),policestationList.getNumber(),policeid);
+		policeCheckInfos = firetableMapper.getPoliceStInfoByMouth(StringToDate.singleDate(policestationList.getEnddate()),policestationList.getNumber(),policeid);
 		for (int i = 0; i < policeCheckInfos.size(); i++) {
 			String coverage = DivisionUtil.ReturnDecimals(Integer.valueOf(policeCheckInfos.get(i).getTablesum()),unitsum.get(0).getUnitsum());//得出覆盖率 =表册数/场所总数
 			policeCheckInfos.get(i).setCoverage(coverage);

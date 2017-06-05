@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.fire.po.Police;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -99,7 +100,7 @@ public class UserService {
 		return userMapper.getUserAndRoleById(userid);
 	}
 
-	public void insertPolice(User user) {
-		userMapper.insert(user);
+	public void insertPolice(Police police) {
+		userMapper.insertPolice(police);
 	}
 }

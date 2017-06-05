@@ -27,8 +27,11 @@ public class User {
     private Date lastlogin;
    
     private Role role;
+
     private Page page;
+
     private String policestation;
+
     public Integer getUserid() {
         return userid;
     }

@@ -1,5 +1,6 @@
 package com.fire.dao;
 
+import com.fire.po.Police;
 import com.fire.po.User;
 import com.fire.po.UserExample;
 
@@ -115,4 +116,6 @@ public interface UserMapper {
    	User getUserInfo(@Param("username")String username, @Param("password")String password);
 
     List<User> getPoliceList();
+
+    void insertPolice(Police police);
 }

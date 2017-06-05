@@ -40,6 +40,7 @@ public class APPInterfaceAction {
 	@ResponseBody
 	public JSONObject getUnitByType(String policestation, int type){
 		JSONObject result;
+		checkService.getUnitByType(policestation, type);
 		switch (type){
 			case 1:
 				result = checkService.findRectifyCheck(policestation);
@@ -99,6 +100,16 @@ public class APPInterfaceAction {
 	public String getTableInformation(Model model, String firetableid) {
 		model.addAttribute("table", checkService.findtableById(firetableid));
 		return "APPInterfaceJsp/check";
+	}
+
+	/**
+	 * 根据隐患表册ID，获取具体数据
+	 * @return
+	 */
+	@RequestMapping(value = "")
+	public String getTroubleTableInfo(Model model, String troubletableid){
+		model.addAttribute("table",checkService.getTroubleInfo(troubletableid));
+		return "";
 	}
 
 	/**
